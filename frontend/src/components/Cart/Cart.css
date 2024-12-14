@@ -1,0 +1,113 @@
+/* Cart Container */
+.cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Cart Title */
+  .cart-title {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Cart List */
+  .cart-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Cart Item */
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Cart Item Image */
+  .cart-item-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  /* Cart Item Details */
+  .cart-item-details {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  .cart-item-details h2 {
+    font-size: 1.5rem;
+    color: #555;
+    margin: 0;
+  }
+  
+  .cart-item-details p {
+    font-size: 1rem;
+    color: #777;
+    margin: 5px 0;
+  }
+  
+  /* Cart Item Actions */
+  .cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Buttons */
+  .cart-button,
+  .cart-remove-button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .cart-button {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .cart-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .cart-remove-button {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .cart-remove-button:hover {
+    background-color: #c82333;
+  }
+  
+  .cart-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Error Message */
+  .cart-error {
+    color: #dc3545;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 20px 0;
+  }
+  

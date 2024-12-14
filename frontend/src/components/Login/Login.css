@@ -1,0 +1,148 @@
+.Login-container{
+    display: inline-table;
+    width: 100%;
+    max-width: 40%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+.Login-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap : 9px;
+    width: 100%;
+    margin-top: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: #139FD7;
+    margin: 0;
+    margin-bottom: 20px;
+}
+.Login-header p {
+    margin-top: 30px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    color: #139FD7;
+    margin-bottom:0 ;
+}
+.Login-header h1{
+    width: 61px ;
+    height: 6px ;
+    background:#139FD7;
+    border-radius: 9px;
+    margin-top: 0px;
+}
+
+.Login-inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+.Login-input{
+    width: 80%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #139FD7;
+    border-radius: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.Login-input:hover {
+    border-color: #139FD7;
+    background-color: #fff;
+  }
+
+  .Login-input img,
+  .Login-input svg {
+    margin-right: 10px;
+    font-size: 1.5rem;
+    color: #139FD7;
+  }
+
+  .Login-input input,
+  .Login-input select {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 20px;
+    color: #000000;
+  }
+
+  .Login-input input ::placeholder {
+    color: #bbb;
+  }
+  
+  .Login-input select {
+    appearance: none;
+    color: #8d8787;
+  }
+
+  .input-error {
+    border: 2px solid #ff4d4d; 
+  }
+  
+  .error-message {
+    font-size: 0.9rem;
+    color: #ff4d4d;
+    margin: auto;  
+    text-align: left; 
+  }
+
+.Login-submit{
+    display: flex;
+    gap: 30px ;
+    margin: 60px auto;
+}
+
+.Login-submit {
+    background-color: #139FD7;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 30px;
+  }
+  
+  .Login-submit:hover {
+    background-color: #007BFF;
+  }
+
+.Login-submit{
+    display: flex;
+    gap: 30px ;
+    margin: 60px auto;
+}
+
+@media screen and (max-width: 800px) {
+    .Login-container {
+        display: inline;
+        margin: auto;
+        padding: 15px;
+        }
+      
+        .Login-header p {
+          font-size: 1.5rem;
+        }
+      
+        .Login-input {
+          padding: 8px;
+        }
+      
+        .Login-submit {
+          padding: 10px;
+        }
+}
