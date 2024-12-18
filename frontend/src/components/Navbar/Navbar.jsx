@@ -109,11 +109,11 @@ function Navbar() {
 
               <div className="Login">
                 <button className="button" onClick={handleCart}>
-                  <FontAwesomeIcon icon={faShoppingCart} size="1x" />
+                  Cart
                 </button>
                 <div className="Login"></div>
                 <button className="button" onClick={handleFavourite}>
-                  <FontAwesomeIcon icon={faHeart} size="1x" />
+                  Favourite
                 </button>
               </div>
               <div className="filter">
@@ -166,7 +166,7 @@ function Navbar() {
         )}
 
         <div className="hamburger" onClick={sideBar}>
-          <FontAwesomeIcon icon={sideOpen ? faTimes : faBars} size="2x" color="white" />
+          <FontAwesomeIcon icon={sideOpen ? faTimes : faBars} size="xl" color="white" />
         </div>
       </div>
     </>
