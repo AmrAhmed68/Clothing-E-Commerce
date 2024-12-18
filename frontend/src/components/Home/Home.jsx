@@ -13,7 +13,7 @@ function Home() {
       const fetchProductsBySection = async (section, setter) => {
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/section/${section}`
+            `https://e-commerce-data-one.vercel.app/api/section/${section}`
           );
           setter(response.data);
         } catch (err) {

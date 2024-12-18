@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:8000/api/${userId}/cart`);
+      const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/${userId}/cart`);
       setCart(response.data);
       calculateTotalPrice(response.data);
     } catch (err) {
@@ -37,7 +37,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (productId, quantity) => {
     try {
-      const response = await axios.post(`http://localhost:8000/api/${userId}/cart`, {
+      const response = await axios.post(`https://e-commerce-data-one.vercel.app/api/${userId}/cart`, {
         productId,
         quantity,
       });
@@ -50,7 +50,7 @@ export const CartProvider = ({ children }) => {
   
   const removeFromCart = async (productId) => {
     try {
-      const response = await axios.delete(`http://localhost:8000/api/${userId}/cart/${productId}`);
+      const response = await axios.delete(`https://e-commerce-data-one.vercel.app/api/${userId}/cart/${productId}`);
       setCart(response.data.cart);
       calculateTotalPrice(response.data.cart);
     } catch (err) {
@@ -66,7 +66,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/${userId}/cart`,
+        `https://e-commerce-data-one.vercel.app/api/${userId}/cart`,
         { productId, quantity }
       );
       setCart(response.data.cart);

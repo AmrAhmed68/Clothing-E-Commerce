@@ -18,7 +18,7 @@ const useProvideAuth = () => {
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
+      const response = await axios.post("https://e-commerce-data-one.vercel.app/api/login", {
         username,
         password,
       });
@@ -47,7 +47,7 @@ const useProvideAuth = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:8000/api/users/${id}`,
+        `https://e-commerce-data-one.vercel.app/api/users/${id}`,
         {
           withCredentials: true,
           headers: {
@@ -70,7 +70,7 @@ const useProvideAuth = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.put(
-        `http://localhost:8000/api/updateProfile/${id}`,
+        `https://e-commerce-data-one.vercel.app/api/updateProfile/${id}`,
         updatedData,
         {
           headers: {
@@ -120,7 +120,7 @@ const useProvideAuth = () => {
       setUser(JSON.parse(storedUser));
     } else if (token) {
       axios
-        .get("http://localhost:8000/api/user", {
+        .get("https://e-commerce-data-one.vercel.app/api/user", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {

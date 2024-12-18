@@ -22,7 +22,7 @@ function ProductCard(props) {
 
         const checkProductInFavourite = async () => {
           try {
-            const response = await axios.get(`http://localhost:8000/api/${id}/favourite/${props.data._id}`);
+            const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/${id}/favourite/${props.data._id}`);
             if (response.data.exists) {
               setIsFavourite(true);
             } else {
@@ -35,7 +35,7 @@ function ProductCard(props) {
 
           const checkProductInCart = async () => {
             try {
-              const response = await axios.get(`http://localhost:8000/api/${id}/cart/${props.data._id}`);
+              const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/${id}/cart/${props.data._id}`);
               if (response.data.exists) {
                 setIsInCart(true);
               } else {

@@ -57,7 +57,7 @@ function AdminDasboard() {
       try {
           const token = localStorage.getItem('token');
         const response = await axios.put(
-          `http://localhost:8000/api/section`,
+          `https://e-commerce-data-one.vercel.app/api/section`,
           { section : section , productId : Id} ,
           { headers: { Authorization: `Bearer ${token}`} }
         );

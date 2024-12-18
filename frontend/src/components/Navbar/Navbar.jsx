@@ -91,7 +91,7 @@ function Navbar() {
                   {user ? (
                     <>
                       <img
-                        src={`http://localhost:8000/${user.profilePhoto}`}
+                        src={`https://e-commerce-data-one.vercel.app/${user.profilePhoto}`}
                         alt="profilePhoto"
                         style={{ width: '20%' }}
                       />
