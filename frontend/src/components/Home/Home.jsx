@@ -28,7 +28,7 @@ function Home() {
 
   return (
     <>
-    <div>
+    <div style={{marginTop : "40px"}}>
       <ImageSlider/>
 
     </div>
