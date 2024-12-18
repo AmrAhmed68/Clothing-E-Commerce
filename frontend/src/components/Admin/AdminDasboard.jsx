@@ -196,10 +196,11 @@ function AdminDasboard() {
         </div>
 
         <div id="slider">
-        <AdminSlider data={photo} onDelete={deletePhoto}  />
+          <h1>add Photo to Slider</h1>
         <input
             type="text"
             name="image"
+            className="admin"
             placeholder="Image URL"
             value={image} 
             onChange={(e) => imageHandler(e.target.value)}
@@ -207,6 +208,7 @@ function AdminDasboard() {
             />
           <button onClick={handleAddPhoto}>Add</button>
           {message && <p>{message}</p>}
+          <AdminSlider data={photo} onDelete={deletePhoto}  />
             </div>
 
           <div id="sections">

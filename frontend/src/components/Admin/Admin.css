@@ -37,6 +37,15 @@ body {
     text-align: center;
     color: #555;
   }
+
+  .admin {
+    margin: 10px;
+    width: calc(45% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
   
   form input, form textarea {
     width: calc(45% - 20px);

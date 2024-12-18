@@ -32,7 +32,7 @@ routers.get("/section/:section", productController.getSections);
 routers.put("/section",ensureAuthenticated,ensureAdmin , productController.addTOSection);
 routers.post("/categories",ensureAuthenticated,ensureAdmin ,productController.addCategory);
 routers.put("/products/:id",ensureAuthenticated,ensureAdmin,productController.updateProduct);
-routers.delete("/produc ts/:id",ensureAuthenticated,ensureAdmin,productController.deleteProduct);
+routers.delete("/products/:id",ensureAuthenticated,ensureAdmin,productController.deleteProduct);
 
 routers.get("/favourite/:userId", productController.getFavourite);
 routers.get("/:userId/favourite/:productId", productController.getFavouriteId);

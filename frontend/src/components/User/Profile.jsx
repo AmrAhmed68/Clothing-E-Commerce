@@ -7,8 +7,8 @@ import UploadImage from '../UploadImage/UploadImage';
 import axios from 'axios';
 
 function Profile() {
-  const { user ,userData, updateUser, logout } = useAuth();
-  const [photo, setphoto] = useState({});
+  const { user, userData, updateUser, logout } = useAuth();
+  const [photo, setPhoto] = useState({});
   const { id } = useParams();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -16,19 +16,19 @@ function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const Photo = async () => {
+    const fetchPhoto = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/photo/${id}`);
-        setphoto(response.data);
+        setPhoto(response.data);
       } catch (error) {
-        console.error('Error checking product in favourites', error);
+        console.error('Error fetching photo:', error);
       }
     };
-    
+
     const fetchUser = async () => {
       try {
         const user = await userData(id);
-        setData(user);
+        setData(user.user || user); 
       } catch (error) {
         console.error('Error fetching user profile:', error);
       } finally {
@@ -36,9 +36,8 @@ function Profile() {
       }
     };
 
-
     fetchUser();
-    Photo();
+    fetchPhoto();
   }, [id, userData]);
 
   const handleEditClick = (field) => {
@@ -46,12 +45,15 @@ function Profile() {
   };
 
   const handleInputChange = (field, value) => {
-    setData((prev) => ({ ...prev, [field]: value }));
+    setData((prev) => ({
+      ...prev,
+      [field]: prev.user ? { ...prev.user, [field]: value } : value,
+    }));
   };
 
   const handleSave = async (field) => {
     try {
-      const updatedData = { [field]: data[field] };
+      const updatedData = { [field]: data[field] }; 
       const updatedUser = await updateUser(id, updatedData);
       console.log('User updated successfully:', updatedUser);
       setData((prev) => ({ ...prev, [field]: updatedUser[field] }));
@@ -72,32 +74,32 @@ function Profile() {
   return (
     <div className="profile-container">
       <div className="profile-header">
-      {photo ? (
+        {photo && (
           <img
             src={`http://localhost:8000/${photo}`}
             alt="Profile"
             style={{ width: '150px', height: '150px', borderRadius: '50%' }}
-          /> ) :
-        <UploadImage /> 
-        }
+          />
+        )}
+        {!photo && <UploadImage />}
         <h1>{user.username}</h1>
       </div>
       <div className="profile-info">
-        {['username', 'email', 'age'].map((field) => (
+        {['username', 'email', 'age', 'phone'].map((field) => (
           <div className="profile-row" key={field}>
             <label>{field.charAt(0).toUpperCase() + field.slice(1)}:</label>
             {isEditing[field] ? (
               <div className="input-container">
                 <input
                   type="text"
-                  value={data[field]}
+                  value={(data.user ? data.user[field] : data[field]) || ''} 
                   onChange={(e) => handleInputChange(field, e.target.value)}
                 />
                 <button onClick={() => handleSave(field)}>Save</button>
               </div>
             ) : (
               <div className="value-container">
-                <span>{data[field]}</span>
+                <span>{(data.user ? data.user[field] : data[field]) || ''}</span>
                 <FaPen className="edit-icon" onClick={() => handleEditClick(field)} />
               </div>
             )}
