@@ -9,7 +9,7 @@ exports.getUserById = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json(user);
+    res.status(200).json({ message: "User retrieved successfully", user });
   } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -19,20 +19,23 @@ exports.getUserById = async (req, res) => {
 exports.login = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
-      console.error("Authentication error:", err);
-      return res.status(500).json({ message: "Internal server error" });
+      console.error("Authentication error:", err.message);
+      return res.status(500).json({ message: "Internal server error" , error: err.message});
     }
     if (!user) {
-      console.log("Authentication failed:", info.message);
-      return res.status(401).json({ message: info.message });
+      console.log("Authentication failed:", err.message);
+      return res.status(401).json({ message: err.message || 'Invalid credentials'});
     }
 
-    req.logIn(user, (err) => {
-      if (err) {
-        console.error("Login failed:", err);
-        return res.status(500).json({ message: "Login failed" });
-      }
-      console.log("Login successful");
+      req.logIn(user, (err) => {
+        if (err) {
+          console.error('Login failed:', err.message);
+          return res.status(500).json({
+            message: 'Login failed',
+            error: err.message,
+          });
+        }
+        console.log('Login successful');
 
       const token = jwt.sign(
         { id: user._id, isAdmin: user.isAdmin },
@@ -46,9 +49,6 @@ exports.login = (req, res, next) => {
         user: {
           username: user.username,
           isAdmin: user.isAdmin,
-          id: user._id,
-          email: user.email,
-          profilePhoto : user.profilePhoto,
         },
         id : user._id
       });
@@ -56,17 +56,24 @@ exports.login = (req, res, next) => {
   })(req, res, next);
 };
 
-exports.isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  return res.status(401).json({ message: "Unauthorized" });
-};
-
 exports.register = async (req, res) => {
   const { username, email, password, retypePassword, age, phone, gender } =
     req.body;
+
+    if (!username || !email || !password || !retypePassword) {
+      return res.status(400).json({ message: "All required fields must be provided" });
+    }
+
+    if (password !== retypePassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
+    
   try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ message: "Email already in use" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
@@ -77,17 +84,22 @@ exports.register = async (req, res) => {
       phone,
       gender,
     });
+
     await newUser.save();
     res.status(201).json({ message: "User registered successfully" });
   } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+    console.error("Error registering user:", error.message);
+    res.status(500).json({ message: "Internal server error", error: error.message });  }
 };
 
 exports.updateUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
     const updates = req.body;
+
+    if (!id) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
 
     const user = await User.findByIdAndUpdate(id, updates, { new: true });
     if (!user) {
@@ -107,12 +119,16 @@ exports.getUserPhoto = async (req, res) => {
   try {
     const user = await User.findById(id);
 
-    if (!user || !user.photo) {
+    if (!user || !user.profilePhoto) {
       return res.status(404).json({ message: 'Photo not found' });
     }
 
-    res.set('Content-Type', user.photoType); // Set MIME type
-    res.send(user.photo); // Send photo as binary data
+    // Validate and set Content-Type header
+    const validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    const mimeType = validMimeTypes.includes(user.photoType) ? user.photoType : 'image/jpeg';
+
+    res.set('Content-Type', mimeType);
+    res.send(user.profilePhoto);
   } catch (error) {
     console.error('Error retrieving photo from database:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -124,11 +140,10 @@ exports.uploadPhoto = async (req, res) => {
     const userId = req.params.id;
     const user = await User.findById(userId);
 
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    if (!user || !user.profilePhoto) {
+      return res.status(404).json({ message: "Photo not found" });
     }
 
-    // Update the user's profilePhoto field
     user.profilePhoto = req.file.path;
     await user.save();
 

@@ -1,0 +1,35 @@
+.slider-container {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 40px;
+    margin-bottom: 40px;
+  }
+  
+  /* Each slide styling */
+  .slider-item {
+    position: relative;
+  }
+  
+  .slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+  }
+  
+  .image-wrapper {
+    overflow: hidden;
+  }
+  
+  .slider-item:hover .slider-image {
+    transform: scale(1.1); /* Smooth zoom on hover */
+  }
+  
+
+  
+ 

@@ -3,7 +3,7 @@ import './Search.css';
 import useProduct from '../../hooks/useProduct';
 import { useNavigate } from 'react-router-dom';
 
-function Search(props) {
+function Search() {
     const [filter, setFilter] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const {products} = useProduct();
@@ -23,8 +23,8 @@ function Search(props) {
       setTimeout(() => setIsModalVisible(false), 200);
     };
     
-    const handleDetailsClick = () => {
-      navigate(`/details/${props.data._id}`);
+    const handleDetailsClick = (productId) => {
+      navigate(`/details/${productId}`);
     };
     
   return (
@@ -42,8 +42,8 @@ function Search(props) {
         <div className="search-dropdown">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((item) => (
-              <div className="search-item" key={item._id} onClick={handleDetailsClick}>
-                <img src = {item.imageUrl} alt={item.name}/>
+              <div className="search-item" key={item._id} onClick={() => handleDetailsClick(item._id)}>
+                <img src = {item.imageUrl} alt={item.name} />
                 <h4>{item.name}</h4>
                 <p>Price: ${item.price}</p>
               </div>

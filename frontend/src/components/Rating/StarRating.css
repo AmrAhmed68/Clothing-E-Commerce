@@ -1,0 +1,18 @@
+/* StarRating.css */
+.star-rating span {
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #ffc107; /* Gold for filled stars */
+  }
+  
+  .star-rating span.unfilled {
+    color: #e4e5e9; /* Grey for unfilled stars */
+  }
+  .Review select {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 20px;
+    color: #000000;
+  }

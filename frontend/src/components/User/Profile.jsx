@@ -4,9 +4,11 @@ import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaPen } from 'react-icons/fa';
 import UploadImage from '../UploadImage/UploadImage';
+import axios from 'axios';
 
 function Profile() {
-  const { userData, updateUser, logout } = useAuth();
+  const { user ,userData, updateUser, logout } = useAuth();
+  const [photo, setphoto] = useState({});
   const { id } = useParams();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -14,6 +16,15 @@ function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const Photo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/photo/${id}`);
+        setphoto(response.data);
+      } catch (error) {
+        console.error('Error checking product in favourites', error);
+      }
+    };
+    
     const fetchUser = async () => {
       try {
         const user = await userData(id);
@@ -25,7 +36,9 @@ function Profile() {
       }
     };
 
+
     fetchUser();
+    Photo();
   }, [id, userData]);
 
   const handleEditClick = (field) => {
@@ -59,15 +72,15 @@ function Profile() {
   return (
     <div className="profile-container">
       <div className="profile-header">
-      {data.profilePhoto ? (
+      {photo ? (
           <img
-            src={`http://localhost:8000/${data.profilePhoto}`}
+            src={`http://localhost:5000/${photo}`}
             alt="Profile"
             style={{ width: '150px', height: '150px', borderRadius: '50%' }}
           /> ) :
         <UploadImage /> 
         }
-        <h1>{data.username}</h1>
+        <h1>{user.username}</h1>
       </div>
       <div className="profile-info">
         {['username', 'email', 'age'].map((field) => (

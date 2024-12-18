@@ -45,7 +45,7 @@ function Navbar() {
     navigate(`/profile/${localStorage.getItem("id")}`);
   }
 
-  const hideFilter = location.pathname === '/login' || location.pathname === '/signup' || location.pathname.startsWith('/profile');
+  const hideFilter = location.pathname === '/admin' || location.pathname === '/login' || location.pathname === '/signup' || location.pathname.startsWith('/profile');
 
   return (
     <>
@@ -54,7 +54,7 @@ function Navbar() {
         { isMobile ? <>
           <div className='logo'>
             <img onClick={handleDetailsClick} style={{cursor : "pointer"}}
-              src="https://i.ibb.co/DLgXb64/ezgif-7-549cab0fea-removebg-preview.png"
+              src="https://i.ibb.co/W513SPR/logob.png"
               alt='Logo'
               />
           </div>
@@ -70,7 +70,7 @@ function Navbar() {
               <>
               {user ? 
                 <>
-                <img src = {`http://localhost:8000/${user.profilePhoto}`} alt="profilePhoto" style={{width : "20%"}}></img>
+                <img src = {`http://localhost:5000/${user.profilePhoto}`} alt="profilePhoto" style={{width : "20%"}}></img>
                 <button className='button'onClick={handleProfile} >  Hi {user.username} !</button> 
                 </>
               :
@@ -99,7 +99,7 @@ function Navbar() {
             <>
           <div className='logo'>
             <img onClick={handleDetailsClick} style={{cursor : "pointer"}}
-              src="https://i.ibb.co/DLgXb64/ezgif-7-549cab0fea-removebg-preview.png"
+              src="https://i.ibb.co/W513SPR/logob.png"
               alt='Logo'
               />
           </div>

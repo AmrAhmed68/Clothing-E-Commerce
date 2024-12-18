@@ -1,0 +1,26 @@
+button {
+    display: inline-block;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #4B5F6C;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  button:hover {
+    background-color: #61737F;
+    transform: scale(0.90);
+  }
+  
+  button:active {
+    background-color: #61737F;
+  }
+  
+  button:focus {
+    outline: none;
+    box-shadow: #61737F;
+  }

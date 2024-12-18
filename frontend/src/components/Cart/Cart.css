@@ -69,40 +69,6 @@
     gap: 10px;
   }
   
-  /* Buttons */
-  .cart-button,
-  .cart-remove-button {
-    padding: 8px 12px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .cart-button {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .cart-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .cart-remove-button {
-    background-color: #dc3545;
-    color: #fff;
-  }
-  
-  .cart-remove-button:hover {
-    background-color: #c82333;
-  }
-  
-  .cart-button:hover {
-    background-color: #0056b3;
-  }
-  
   /* Error Message */
   .cart-error {
     color: #dc3545;

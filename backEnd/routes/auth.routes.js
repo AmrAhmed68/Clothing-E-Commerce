@@ -10,7 +10,6 @@ const upload = require("../middleware/multer");
 // User
 
 routers.get("/users/:id", authenticateToken, authController.getUserById);
-routers.get("/dashboard", authController.isLoggedIn, (req, res) => {res.json({ message: "Welcome to the dashboard", user: req.user });});
 routers.get("/photo/:id", authController.getUserPhoto);
 routers.post("/register", authController.register);
 routers.post("/login", passport.authenticate("local"), authController.login);
@@ -20,21 +19,30 @@ routers.put("/updateProfile/:id",authenticateToken,authController.updateUserProf
 // Product Routes
 routers.get("/products", productController.getAllProducts);
 routers.get("/categories", productController.getAllCategories);
+routers.get("/subcategory/:categoryName/:subcategoryName", productController.getSubCategory);
+routers.get("/subcategory/:categoryName", productController.getCategory);
 routers.get("/products/:id", productController.getProductById);
-routers.post("/products",productController.addProduct);
-routers.post("/categories", ensureAuthenticated,ensureAdmin,productController.addCategory);
+routers.post('/:productId/reviews',productController.reviews);
+routers.get('/:productId/reviews',productController.getReviews);
+routers.post("/products",ensureAuthenticated,ensureAdmin,productController.addProduct);
+routers.post("/slider",ensureAuthenticated,ensureAdmin,productController.addPhoto);
+routers.delete("/slider/:id",ensureAuthenticated,ensureAdmin,productController.removePhoto);
+routers.get("/slider", productController.getAllPhoto);
+routers.get("/section/:section", productController.getSections);
+routers.put("/section",ensureAuthenticated,ensureAdmin , productController.addTOSection);
+routers.post("/categories",ensureAuthenticated,ensureAdmin ,productController.addCategory);
 routers.put("/products/:id",ensureAuthenticated,ensureAdmin,productController.updateProduct);
-routers.delete("/products/:id",ensureAuthenticated,ensureAdmin,productController.deleteProduct);
+routers.delete("/produc ts/:id",ensureAuthenticated,ensureAdmin,productController.deleteProduct);
 
 routers.get("/favourite/:userId", productController.getFavourite);
+routers.get("/:userId/favourite/:productId", productController.getFavouriteId);
 routers.post("/favourite/:userId",productController.addFavourite);
 routers.delete("/favourite/:userId/:productId",productController.removeFavourite);
 
 routers.post("/:userId/cart", productController.addCart);
-routers.put("/:userId/addcart", productController.addQuantityCart);
-routers.put("/:userId/minscart", productController.minsQuantityCart);
+routers.put('/:userId/cart', productController.updateCartQuantity);
 routers.get("/:userId/cart", productController.getCart);
-routers.get("/:userId/price", productController.totalPrice);
+routers.get("/:userId/cart/:productId", productController.getCartId);
 routers.delete("/:userId/cart/:productId", productController.removeCart);
 
 module.exports = routers;

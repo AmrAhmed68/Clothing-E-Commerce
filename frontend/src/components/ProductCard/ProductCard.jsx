@@ -3,74 +3,98 @@ import './ProductCard.css'
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping , faCartArrowDown , faHeart} from '@fortawesome/free-solid-svg-icons';
-import useCart from '../../hooks/useCart'
+import {useCart} from '../../hooks/CartProvider'
 import useFavourite from '../../hooks/useFavourite';
+import ProductReviews from "../Rating/ProductReviews";
+import axios from 'axios';
 
 function ProductCard(props) {
   const id = localStorage.getItem("id")
-    const {addFavourite , removeFavourite , getFavouriteStatus} = useFavourite(id)
-    const { addToCart  , removeFromCart , getInCardStatus} = useCart(id)
-    const [inCard, setInCard] = useState(false);
-    const [isFavourite, setisFavourite] = useState(false);
+    const {addFavourite , removeFavourite} = useFavourite(id)
+    const {addToCart  , removeFromCart} = useCart()
+    const [isInCart, setIsInCart] = useState(false);  
+    const [isFavourite, setIsFavourite] = useState(false);
     const navigate = useNavigate();
+    const [refresh, setRefresh] = useState(false);
+    
 
     useEffect(() => {
-        const status = getInCardStatus(props.data._id);
-        const status1 = getFavouriteStatus(props.data._id);
-        setInCard(status);
-        setisFavourite(status1)
-      }, [props.data._id, getInCardStatus , getFavouriteStatus]);
-    
+
+        const checkProductInFavourite = async () => {
+          try {
+            const response = await axios.get(`http://localhost:5000/api/${id}/favourite/${props.data._id}`);
+            if (response.data.exists) {
+              setIsFavourite(true);
+            } else {
+              setIsFavourite(false);
+            }
+          } catch (error) {
+            console.error('Error checking product in favourites', error);
+          }
+        };
+
+          const checkProductInCart = async () => {
+            try {
+              const response = await axios.get(`http://localhost:5000/api/${id}/cart/${props.data._id}`);
+              if (response.data.exists) {
+                setIsInCart(true);
+              } else {
+                setIsInCart(false);
+              }
+            } catch (error) {
+              console.error('Error checking product in cart', error);
+            }
+          };
+      
+          checkProductInCart();
+          checkProductInFavourite()
+      }, [props.data._id , id]);
+
       const handleDetailsClick = () => {
         navigate(`/details/${props.data._id}`);
       };
-    
+      
       const handleAddToCart = () => {
-        addToCart(props.data._id);
-        setInCard(true); 
+        addToCart(props.data._id , 1);
+        setIsInCart(true)
       };
 
       const handleAddToFavourite = () => {
         addFavourite(props.data._id);
-        setisFavourite(true); 
+        setIsFavourite(true); 
+
       };
     
       const handleRemoveFromCart = () => {
         removeFromCart(props.data._id); 
-        setInCard(false); 
+        setIsInCart(false)
       };
       
       const handleRemoveFavourite = () => {
         removeFavourite(props.data._id); 
-        setisFavourite(false); 
+        setIsFavourite(false); 
       };
 
   return (
-        <div className='card'  style={{cursor : "pointer"}}>
-            <img src={props.data.imageUrl} alt="" onClick={handleDetailsClick} />
-            {isFavourite === false ? 
-              <button onClick={handleAddToFavourite}>
-              <FontAwesomeIcon icon={faHeart} size="1x" color = "white" />
-              </button> 
-            :
-            <button onClick={handleRemoveFavourite}>
-            <FontAwesomeIcon icon={faHeart } size="1x" color = "red" />
-            </button> 
-            }
-            <h2>{props.data.name}</h2>
-            <h3>{props.data.description}</h3>
-            <p> Price : {props.data.price}</p>
-            {inCard === false ? 
-                <button onClick={handleAddToCart}>
-                <FontAwesomeIcon icon={faCartShopping} size="1x" />
-                </button> 
-            :
-                <button onClick={handleRemoveFromCart}>
-                <FontAwesomeIcon icon={faCartArrowDown } size="1x" color = "red" />
-                </button> 
-            }
-        </div>
-    )
+    <div className="product-card">
+    <div className="image-container" >
+      <img src={props.data.imageUrl} alt={props.data.name} onClick={handleDetailsClick} className="product-image" />
+      <button className={`heart-button ${isFavourite ? 'favourited' : ''}`} onClick={isFavourite ? handleRemoveFavourite : handleAddToFavourite}>
+        <FontAwesomeIcon icon={faHeart} size="2x" />
+      </button>
+    </div>
+    <div className="card-details">
+      <h2 className="product-name">{props.data.name}</h2>
+      <p className="product-description">{props.data.brand}</p>
+      <p className="product-price">${props.data.price}</p>
+      <button className="cart-button" onClick={isInCart ? handleRemoveFromCart : handleAddToCart}>
+        <FontAwesomeIcon icon={isInCart? faCartArrowDown : faCartShopping} size="1x" />
+      </button>
+
+      <ProductReviews productId={props.data._id} key={refresh} />
+    </div>
+  </div>
+);
 }
 
 export default ProductCard

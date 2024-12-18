@@ -6,14 +6,8 @@ const ProductSchema = new mongoose.Schema({
       required: [true, "Clothing item must have a name"],
       trim: true,
     },
-    description: {
-      type: String,
-      required: [true, "Clothing item must have a description"],
-      trim: true,
-    },
     category: {
-      type: mongoose.Schema.Types.ObjectId, // Reference to the Category model
-      ref: 'Category',
+      type: String,
       required: [true, "Product must belong to a category"],
     },
     subcategory: {
@@ -35,20 +29,14 @@ const ProductSchema = new mongoose.Schema({
       required: [true, "Clothing item must have a price"],
       min: [0, "Price cannot be negative"],
     },
-    discount: {
-      type: Number,
-      default: 0,
-      min: [0, "Discount cannot be negative"],
-      max: [100, "Discount cannot exceed 100%"],
-    },
-    finalPrice: {
-      type: Number,
-      required: false,
-    },
     stock: {
       type: Number,
       required: [true, "Clothing item must have a stock value"],
       min: [0, "Stock cannot be negative"],
+    },
+    section : {
+      type: String,
+      required: [false, "Product must belong to a section"],
     },
     brand: {
       type: String,
@@ -59,31 +47,32 @@ const ProductSchema = new mongoose.Schema({
       required: [true, "Clothing item must have an image URL"],
     },
     ratings: {
-      average: {
-        type: Number,
-        default: 0,
-        min: [0, "Rating cannot be negative"],
-        max: [5, "Rating cannot exceed 5"],
-      },
+      average: { type: Number, default: 0, min: 0, max: 5 },
       reviews: [
         {
           userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-          comment: String,
-          rating: {
-            type: Number,
-            min: [1, "Rating cannot be less than 1"],
-            max: [5, "Rating cannot exceed 5"],
-          },
+          userName: { type: String, ref: "User" },
+          comment: { type: String, trim: true },
+          rating: { type: Number, required: true, min: 1, max: 5 },
           createdAt: { type: Date, default: Date.now },
         },
       ],
     },
   });
   
-  ProductSchema.pre("save", function (next) {
-    this.finalPrice = this.price - (this.price * this.discount) / 100;
-    this.updatedAt = Date.now();
-    next();
-  });
+ProductSchema.methods.addReview = async function (userId, rating) {
+  const existingReview = this.ratings.reviews.find(
+    (review) => review.userId.toString() === userId.toString()
+  );
+
+  if (existingReview) {
+    throw new Error('User has already reviewed this product.');
+  }
+
+  this.ratings.reviews.push({ userId, userName , rating, createdAt: new Date() });
+  const totalRatings = this.ratings.reviews.reduce((sum, review) => sum + review.rating, 0);
+  this.ratings.average = totalRatings / this.ratings.reviews.length;
+  return this.save();
+};
   
 module.exports = mongoose.model('Product', ProductSchema);

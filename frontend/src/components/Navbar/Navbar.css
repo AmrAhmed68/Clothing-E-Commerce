@@ -4,7 +4,7 @@
     top: 0;
     width: auto ;
     padding: 10px 20px;
-    background-color: #139FD7;
+    background-color: #4B5F6C;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -41,7 +41,7 @@
 } 
 
 .Login:hover {
-    color: #007BFF;
+    color: #61737F;
     text-decoration: underline;
 }
 
@@ -72,7 +72,7 @@
     left: 0;
     width: 40%;
     height: 100vh;
-    background-color: #139FD7;
+    background-color: #4B5F6C;
     color: white;
     display: flex;
     flex-direction: column;

@@ -127,22 +127,6 @@ label {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
-.input-container button {
-  padding: 8px 14px;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.input-container button:hover {
-  background: #0056b3;
-}
-
-/* Responsive design */
 @media (max-width: 768px) {
   .profile-container {
     padding: 20px;

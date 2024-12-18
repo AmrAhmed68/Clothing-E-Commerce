@@ -1,38 +1,22 @@
 import React, { useEffect } from 'react';
-import useCart from '../../hooks/useCart';
+import {useCart} from '../../hooks/CartProvider';
 import './Cart.css'; // Import the CSS file
 
 const Cart = () => {
-  const userId = localStorage.getItem('id');
-  const {
-    price,
-    fetchTotal,
-    cart,
-    fetchCart,
-    removeFromCart,
-    minsQuantityCart,
-    addQuantityCart,
-    loading,
-    error,
-  } = useCart(userId);
+  const { cart , totalPrice, fetchCart, removeFromCart, updateQuantity } = useCart();
 
   useEffect(() => {
-    if (userId) {
-      fetchCart();
-      fetchTotal();
-    }
-  }, [fetchCart, fetchTotal, userId]);
-
-  if (loading) return <p className="cart-loading">Loading cart...</p>; 
-  if (error) return <p className="cart-error">{error}</p>; 
+    fetchCart();
+  }, [cart]);  
 
   return (
     <div className="cart-container">
       <h1 className="cart-title">My Cart</h1>
-      <h2 className="cart-title">Total Price: ${price}</h2>
+      <h2 className="cart-title">Total Price: ${totalPrice}</h2>
       <ul className="cart-list">
+
         {cart.map((item) => (
-          <li key={item.productId} className="cart-item">
+          <li key={item.productId._id} className="cart-item">
             <div className="cart-item-image">
               <img src={item.productId.imageUrl} alt={item.productId.name} />
             </div>
@@ -44,14 +28,14 @@ const Cart = () => {
               <div className="cart-item-actions">
                 <button
                   className="cart-button"
-                  onClick={() => minsQuantityCart(item.productId._id, item.quantity - 1)}
+                  onClick={() => updateQuantity(item.productId._id, item.quantity - 1)}
                   disabled={item.quantity <= 1}
                 >
                   -
                 </button>
                 <button
                   className="cart-button"
-                  onClick={() => addQuantityCart(item.productId._id, item.quantity + 1)}
+                  onClick={() => updateQuantity(item.productId._id, item.quantity + 1)}
                   disabled={item.quantity >= item.productId.stock}
                 >
                   +

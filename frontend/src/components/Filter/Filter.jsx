@@ -11,7 +11,7 @@ function Filter() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/categories');
+        const response = await axios.get('http://localhost:5000/api/categories');
         setCategories(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error.response?.data || error.message);
@@ -31,8 +31,8 @@ function Filter() {
         <div
           key={item._id}
           className="category-item"
-          onMouseEnter={() => setHoveredCategory(item.category.name)}  // Show subcategories on hover
-          onMouseLeave={() => setHoveredCategory(null)}  // Hide subcategories when not hovered
+          onMouseEnter={() => setHoveredCategory(item.category.name)}  
+          onMouseLeave={() => setHoveredCategory(null)}  
         >
           <button onClick={() => handleRoute(item.category.name)}>
             {item.category.name}

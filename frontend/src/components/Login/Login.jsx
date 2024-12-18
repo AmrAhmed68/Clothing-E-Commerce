@@ -11,7 +11,6 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Validation schema using Yup
   const validationSchema = Yup.object({
     username: Yup.string()
       .min(3, "Username must be at least 3 characters")
@@ -23,7 +22,6 @@ const Login = () => {
       .required("Password is required"),
   });
 
-  // Formik setup
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -92,6 +90,12 @@ const Login = () => {
           <button type="submit" className="Login-submit">Login to my account</button>
         </form>
 
+      </section>
+
+      <section className='Login-container'>
+      <div className='Login-header'>
+        <p>Don't have an account?</p>
+      </div>
         <button onClick={handleSignUp} className="Login-submit">Sign Up</button>
       </section>
     </>

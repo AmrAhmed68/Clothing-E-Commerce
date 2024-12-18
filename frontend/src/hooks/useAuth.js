@@ -18,7 +18,7 @@ const useProvideAuth = () => {
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
+      const response = await axios.post("http://localhost:5000/api/login", {
         username,
         password,
       });
@@ -28,6 +28,7 @@ const useProvideAuth = () => {
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("isAdmin", (data.user.isAdmin));
         localStorage.setItem("id", (data.id));
         setUser(data.user);
       }
@@ -36,7 +37,7 @@ const useProvideAuth = () => {
     } catch (error) {
       console.error(
         "Error during login:",
-        error.response?.data || error.message
+        error.message
       );
       throw error;
     }
@@ -46,7 +47,7 @@ const useProvideAuth = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:8000/api/users/${id}`,
+        `http://localhost:5000/api/users/${id}`,
         {
           withCredentials: true,
           headers: {
@@ -69,7 +70,7 @@ const useProvideAuth = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.put(
-        `http://localhost:8000/api/updateProfile/${id}`,
+        `http://localhost:5000/api/updateProfile/${id}`,
         updatedData,
         {
           headers: {
@@ -96,11 +97,18 @@ const useProvideAuth = () => {
   };
 
   const logout = () => {
-    // localStorage.removeItem("token");
-    // localStorage.removeItem("user");
-    // localStorage.removeItem("id");
     localStorage.clear()
     setUser(null);
+  };
+
+  const getToken = () => localStorage.getItem('token');
+
+  const isAdmin = async () => {
+    const token = getToken();
+    if (!token) return false;
+  
+    const decoded = JSON.parse(atob(token.split('.')[1])); 
+    return decoded.isAdmin;
   };
 
   useEffect(() => {
@@ -112,7 +120,7 @@ const useProvideAuth = () => {
       setUser(JSON.parse(storedUser));
     } else if (token) {
       axios
-        .get("http://localhost:8000/api/user", {
+        .get("http://localhost:5000/api/user", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
@@ -128,6 +136,7 @@ const useProvideAuth = () => {
   }, []);
 
   return {
+    isAdmin,
     updateUser,
     user,
     login,

@@ -1,14 +1,47 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api/products';
+const API_BASE_URL = 'http://localhost:5000/api/products';
 
 const useProduct = () => {
   const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [cproduct, setCProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch all products
+  const fetchCategory = async (categoryName, subcategoryName) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(`http://localhost:5000/api/subcategory/${categoryName}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setCProduct(Array.isArray(response.data.products) ? response.data.products : []);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error fetching products');
+    } finally {
+      setLoading(false);
+    }
+  };  
+  const fetchSubCategory = async (categoryName, subcategoryName) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(`http://localhost:5000/api/subcategory/${categoryName}/${subcategoryName}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setProduct(Array.isArray(response.data.products) ? response.data.products : []);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error fetching products');
+    } finally {
+      setLoading(false);
+    }
+  };
   const fetchProducts = async () => {
     setLoading(true);
     setError(null);
@@ -21,8 +54,6 @@ const useProduct = () => {
       setLoading(false);
     }
   };
-
-  // Fetch a single product by ID
   const fetchProductById = async (id) => {
     setLoading(true);
     setError(null);
@@ -35,8 +66,6 @@ const useProduct = () => {
       setLoading(false);
     }
   };
-
-  // Add a new product
   const addProduct = async (productData) => {
     setError(null);
     try {
@@ -48,8 +77,6 @@ const useProduct = () => {
       setError(err.response?.data?.message || 'Error adding product');
     }
   };
-
-  // Update a product by ID
   const updateProduct = async (id, updatedData) => {
     setError(null);
     try {
@@ -63,8 +90,6 @@ const useProduct = () => {
       setError(err.response?.data?.message || 'Error updating product');
     }
   };
-
-  // Delete a product by ID
   const deleteProduct = async (id) => {
     setError(null);
     try {
@@ -80,14 +105,18 @@ const useProduct = () => {
   }, []);
 
   return {
+    product,
     products,
     loading,
     error,
+    cproduct,
+    fetchCategory,
     fetchProducts,
     fetchProductById,
     addProduct,
     updateProduct,
     deleteProduct,
+    fetchSubCategory,
   };
 };
 
