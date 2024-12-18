@@ -411,7 +411,6 @@ exports.getSections = async (req , res) => {
 
 exports.addTOSection = async (req , res) => {
   const { section  , productId} = req.body;
-  console.log(section  , productId)
 
   try {
     const product = await Product.findByIdAndUpdate(

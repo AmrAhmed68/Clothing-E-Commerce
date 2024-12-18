@@ -14,7 +14,7 @@ function AdminTable({ data, onDelete }) {
       <TableBody>
         {data.map((item) => (
           <TableRow key={item._id}>
-            <TableCell style={{maxWidth : "200px"}}><img src = {item.image} alt = "" style={{ width : "10%"}}/></TableCell>
+            <TableCell style={{maxWidth : "200px"}}><img src = {item.image || ""} alt = "" style={{ width : "10%"}}/></TableCell>
             <TableCell>
               <Button onClick={() => onDelete(item._id)}>Delete</Button>
             </TableCell>

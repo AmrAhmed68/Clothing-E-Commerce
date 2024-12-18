@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import useAdmin from '../../hooks/useAdmin';
 import AdminTable from './AdminTable';
 import AdminSlider from './AdminSlider';
+import AdminSection from './AdminSection';
 import './Admin.css'
-import ProductAdmin from "./ProductAdmin";
+import axios from "axios";
 
 function AdminDasboard() {
     const {data, fetchData, addItem, deleteItem , editItem , photo  ,fetchPhoto , deletePhoto , addPhoto } = useAdmin()
@@ -51,6 +52,20 @@ function AdminDasboard() {
         console.error("Error saving product:", err);
       }
     };
+
+    const handleUpdateSection = async (section , Id) => {
+      try {
+          const token = localStorage.getItem('token');
+        const response = await axios.put(
+          `http://localhost:8000/api/section`,
+          { section : section , productId : Id} ,
+          { headers: { Authorization: `Bearer ${token}`} }
+        );
+        console.log("Section updated:", response.data);
+      } catch (err) {
+        console.error("Error updating section:", err);
+      }
+    };
   
     const handleEdit = (product) => {
       setCurrentProduct(product);
@@ -89,9 +104,21 @@ function AdminDasboard() {
       }
     };
 
+    const scrollToSection = (id) => {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
   
     return (
         <div className="dashboard-container">
+           <nav>
+            <button onClick={() => scrollToSection('product')}>Go to Products</button>
+            <button onClick={() => scrollToSection('slider')}>Go to Slider</button>
+            <button onClick={() => scrollToSection('sections')}>Go to Sections</button>
+          </nav>
+          <div id="product">
         <h1>Admin Dashboard</h1>
         <form onSubmit={handleAddOrUpdate}>
           <h2>{currentProduct ? "Edit Product" : "Add Product"}</h2>
@@ -166,7 +193,9 @@ function AdminDasboard() {
           )}
         </form>
         <AdminTable data={data} onDelete={deleteItem}  onEdit={handleEdit}/>
+        </div>
 
+        <div id="slider">
         <AdminSlider data={photo} onDelete={deletePhoto}  />
         <input
             type="text"
@@ -175,11 +204,14 @@ function AdminDasboard() {
             value={image} 
             onChange={(e) => imageHandler(e.target.value)}
             required
-          />
+            />
           <button onClick={handleAddPhoto}>Add</button>
           {message && <p>{message}</p>}
+            </div>
 
-          <ProductAdmin product={data} />
+          <div id="sections">
+            <AdminSection data={data} handleUpdateSection={handleUpdateSection}/>
+          </div>
       </div>
     );
   }
