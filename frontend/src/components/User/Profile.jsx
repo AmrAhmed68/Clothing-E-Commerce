@@ -18,7 +18,7 @@ function Profile() {
   useEffect(() => {
     const Photo = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/photo/${id}`);
+        const response = await axios.get(`http://localhost:8000/api/photo/${id}`);
         setphoto(response.data);
       } catch (error) {
         console.error('Error checking product in favourites', error);
@@ -74,7 +74,7 @@ function Profile() {
       <div className="profile-header">
       {photo ? (
           <img
-            src={`http://localhost:5000/${photo}`}
+            src={`http://localhost:8000/${photo}`}
             alt="Profile"
             style={{ width: '150px', height: '150px', borderRadius: '50%' }}
           /> ) :

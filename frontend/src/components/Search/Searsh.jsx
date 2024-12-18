@@ -10,9 +10,12 @@ function Search() {
     const navigate = useNavigate();
     
 
-    const filteredProducts = products.filter((item) =>
-        item.name.toLowerCase().includes(filter.toLowerCase())
+    const filteredProducts = products
+    .filter((item) => item && item.name) // Ensure item and item.name exist
+    .filter((item) =>
+      item.name.toLowerCase().includes(filter.toLowerCase())
     );
+  
 
     const handleInputChange = (e) => {
       setFilter(e.target.value);

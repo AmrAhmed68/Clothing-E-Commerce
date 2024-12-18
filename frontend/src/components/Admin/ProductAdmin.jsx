@@ -7,7 +7,7 @@ function ProductAdmin ({ product })  {
     try {
         const token = localStorage.getItem('token');
       const response = await axios.put(
-        `http://localhost:5000/api/section`,
+        `http://localhost:8000/api/section`,
         { section : section , productId : Id} ,
         { headers: { Authorization: `Bearer ${token}`} }
       );

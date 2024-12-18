@@ -9,7 +9,7 @@ const useCart = (userId) => {
 
   const fetchCart = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/${userId}/cart`);
+      const response = await axios.get(`http://localhost:8000/api/${userId}/cart`);
       setCart(response.data);
     } catch (err) {
       setError(err.response?.data || 'Error fetching cart');
@@ -17,7 +17,7 @@ const useCart = (userId) => {
   };
   const fetchTotal = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/${userId}/price`);
+      const response = await axios.get(`http://localhost:8000/api/${userId}/price`);
       setPrice(response.data.totalPrice);
     } catch (err) {
       setError(err.response?.data || 'Error fetching cart');
@@ -26,7 +26,7 @@ const useCart = (userId) => {
 
   const addToCart = async (productId, quantity = 1) => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/${userId}/cart`, {
+      const response = await axios.post(`http://localhost:8000/api/${userId}/cart`, {
         productId,
         quantity,
       });
@@ -39,7 +39,7 @@ const useCart = (userId) => {
 
   const removeFromCart = async (productId) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/api/${userId}/cart/${productId}`);
+      const response = await axios.delete(`http://localhost:8000/api/${userId}/cart/${productId}`);
       setCart(response.data.cart);
       localStorage.setItem(`inCard_${userId}_${productId}`, JSON.stringify(true));
     } catch (err) {
@@ -55,7 +55,7 @@ const useCart = (userId) => {
   
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/${userId}/minscart`,
+        `http://localhost:8000/api/${userId}/minscart`,
         { productId, quantity },
         {
           headers: {
@@ -78,7 +78,7 @@ const useCart = (userId) => {
   
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/${userId}/addcart`,
+        `http://localhost:8000/api/${userId}/addcart`,
         { productId, quantity },
         {
           headers: {

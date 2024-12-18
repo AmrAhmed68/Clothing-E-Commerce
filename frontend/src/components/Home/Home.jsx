@@ -13,7 +13,7 @@ function Home() {
       const fetchProductsBySection = async (section, setter) => {
         try {
           const response = await axios.get(
-            `http://localhost:5000/api/section/${section}`
+            `http://localhost:8000/api/section/${section}`
           );
           setter(response.data);
         } catch (err) {

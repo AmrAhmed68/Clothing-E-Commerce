@@ -70,7 +70,7 @@ function Navbar() {
               <>
               {user ? 
                 <>
-                <img src = {`http://localhost:5000/${user.profilePhoto}`} alt="profilePhoto" style={{width : "20%"}}></img>
+                <img src = {`http://localhost:8000/${user.profilePhoto}`} alt="profilePhoto" style={{width : "20%"}}></img>
                 <button className='button'onClick={handleProfile} >  Hi {user.username} !</button> 
                 </>
               :

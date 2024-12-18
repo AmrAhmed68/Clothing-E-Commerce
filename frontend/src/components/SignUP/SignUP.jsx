@@ -46,7 +46,7 @@ const SignUP = () => {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await axios.post("http://localhost:5000/api/register", values);
+        const response = await axios.post("http://localhost:8000/api/register", values);
         console.log(response.data);
         resetForm();
         navigate("/Login");

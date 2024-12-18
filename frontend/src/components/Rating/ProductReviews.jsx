@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import StarRating from "./StarRating";
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "http://localhost:8000/api";
 
 const ProductReviews = ({ productId }) => {
   const [reviews, setReviews] = useState([]);
