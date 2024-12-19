@@ -18,7 +18,7 @@ const ProductSchema = new mongoose.Schema({
     size: {
       type: [String],
       required: [false, "Clothing item must have available sizes"],
-      enum: ["XS", "S", "M", "L", "XL", "XXL"],
+      // enum: ["XS", "S", "M", "L", "XL", "XXL"],
     },
     color: {
       type: [String],
