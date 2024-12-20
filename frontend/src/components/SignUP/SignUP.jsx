@@ -57,9 +57,12 @@ const SignUP = () => {
     },
   });
 
+  const handleLogIn = () => {
+    navigate('/login');
+  };
+
   return (
-    <>
-      <section className='signup-container'>
+      <div className='signup-container'>
         <div className='signup-header'>
           <p>Sign Up</p>
           <h1> </h1>
@@ -154,14 +157,20 @@ const SignUP = () => {
           {formik.errors.submit && (
             <p className="error-message">{formik.errors.submit}</p>
           )}
-
           <button type="submit" className="Signup-submit">
             Register
           </button>
         </form>
-      </section>
+        <div className='Login-header'>
+        <h2>Already have an account? <span onClick={handleLogIn} style={{cursor : "pointer" , color : "black"}} >LogIn</span></h2>
+      </div>
+      </div>
 
-      {/* <section className='signup-container'>
+  );
+};
+
+export default SignUP;
+{/* <section className='signup-container'>
         <div className='signup-header'>
           <p>Sign Up</p>
           <h1> </h1>
@@ -262,9 +271,4 @@ const SignUP = () => {
             Register
           </button>
         </form>
-      </section> */}
-    </>
-  );
-};
-
-export default SignUP;
+      </section> * */}

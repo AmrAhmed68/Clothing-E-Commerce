@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+
 
 const API_BASE_URL = 'https://e-commerce-data-one.vercel.app/api';
 
@@ -7,7 +9,7 @@ const useAdmin = () => {
   const [data, setData] = useState([]);
   const [photo, setPhoto] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
 
   const fetchData = async () => {
     setLoading(true);
@@ -79,25 +81,43 @@ const useAdmin = () => {
     }
   };
 
-  const deleteItem = async (id) => {
+  const deleteItem =  (id) => {
     try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`${API_BASE_URL}/products/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
+      Swal.fire({
+        title: 'You are sure to delete this produuct!',
+        icon: 'warning',
+        confirmButtonText: 'Sure',
+        showCancelButton: true,
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const token = localStorage.getItem('token');
+          await axios.delete(`${API_BASE_URL}/products/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setData((prev) => prev.filter((item) => item._id !== id));
+        }
       });
-      setData((prev) => prev.filter((item) => item._id !== id));
     } catch (err) {
       setError(err.response?.data?.message || 'Error deleting item');
     }
   };
 
-  const deletePhoto = async (id) => {
+  const deletePhoto =  (id) => {
     try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`${API_BASE_URL}/slider/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
+      Swal.fire({
+        title: 'You are sure to delete this Photo!',
+        icon: 'warning',
+        confirmButtonText: 'Sure',
+        showCancelButton: true,
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const token = localStorage.getItem('token');
+          await axios.delete(`${API_BASE_URL}/slider/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setPhoto((prev) => prev.filter((item) => item._id !== id));
+        }
       });
-      setPhoto((prev) => prev.filter((item) => item._id !== id));
     } catch (err) {
       setError(err.response?.data?.message || 'Error deleting item');
     }

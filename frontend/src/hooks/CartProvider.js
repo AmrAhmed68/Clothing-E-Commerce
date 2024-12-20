@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const CartContext = createContext();
 
@@ -35,7 +36,26 @@ export const CartProvider = ({ children }) => {
     setTotalPrice(total);
   };
 
+  const showLoginPrompt = () => {
+    Swal.fire({
+      title: 'You are not logged in!',
+      text: 'Please log in to perform this action.',
+      icon: 'warning',
+      confirmButtonText: 'Login',
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/login'; // Redirect to login page
+      }
+    });
+  };
+
   const addToCart = async (productId, quantity) => {
+    if (!userId) {
+      showLoginPrompt();
+      return;
+    }
+
     try {
       const response = await axios.post(`https://e-commerce-data-one.vercel.app/api/${userId}/cart`, {
         productId,
@@ -47,8 +67,13 @@ export const CartProvider = ({ children }) => {
       setError(err.response?.data || 'Error adding to cart');
     }
   };
-  
+
   const removeFromCart = async (productId) => {
+    if (!userId) {
+      showLoginPrompt();
+      return;
+    }
+
     try {
       const response = await axios.delete(`https://e-commerce-data-one.vercel.app/api/${userId}/cart/${productId}`);
       setCart(response.data.cart);
@@ -59,6 +84,11 @@ export const CartProvider = ({ children }) => {
   };
 
   const updateQuantity = async (productId, quantity) => {
+    if (!userId) {
+      showLoginPrompt();
+      return;
+    }
+
     if (quantity < 1) {
       setError('Quantity must be at least 1');
       return;

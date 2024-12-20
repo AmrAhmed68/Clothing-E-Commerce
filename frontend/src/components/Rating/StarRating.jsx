@@ -1,4 +1,7 @@
+import './StarRating.css'
 import React from "react";
+
+
 
 const StarRating = ({ rating, maxStars = 5 }) => {
   return (

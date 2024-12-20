@@ -5,36 +5,106 @@
 }
 
 .category-item {
-  position: relative; 
+  position: relative;
+  margin: 10px 0;
+
 }
 
 .subcategory-list {
   position: absolute;
-  top: 100%;
+  top: 100%; /* Aligns the dropdown just below the category button */
   left: 0;
   background-color: #4B5F6C;
-  border-radius: 15px;
-  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 100;
   display: flex;
   flex-direction: column;
-  width: max-content;
-  z-index: 10;
+  width: 150px;
+  transform-origin: top;
+  animation: slideDown 0.3s ease-in-out;
+  border-radius: 20px;
+}
+
+.subcategory-list .subcategory {
+  padding: 10px 20px;
+  background-color: #4B5F6C;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subcategory-list .subcategory:hover {
+  background-color: #61737F;
+}
+
+.search-input {
+  width: 90%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.subcategory {
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.subcategory:hover {
+  background-color: #3A4B55;
+  border-radius: 8px;
 }
 
 @media screen and (max-width: 800px) {
   .filter-container {
     flex-direction: column;
+    align-items: flex-start;
   }
+
   .subcategory-list {
-    position: relative;
-    top: 100%;
+    background-color: #9CC3DD;
+    position: absolute;
+    top: 100%; /* Aligns the dropdown just below the category button */
     left: 0;
-    background-color: #9cc3dd;
-    border-radius: 15px;
-    padding: 10px;
+    background-color: #4B5F6C;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 100;
     display: flex;
     flex-direction: column;
-    width: max-content;
-    /* z-index: 10; */
+    width: 150px;
+    transform-origin: top;
+    animation: slideDown 0.3s ease-in-out;
+    border-radius: 20px;
+  }
+
+  .subcategory {
+    border-radius: 0;
+    padding: 12px 16px;
+    text-align: center;
+  }
+
+  .subcategory:hover {
+    background-color: #82B9CE;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
   }
 }

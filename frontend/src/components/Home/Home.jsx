@@ -33,21 +33,21 @@ function Home() {
 
     </div>
      <div className="home">
-     <h2>Most Popular</h2>
+     <h2 style={{textAlign : "center"}}>Most Popular</h2>
      <div className='container'>
        {mostPopular.map((product) => (
          <ProductCard key={product._id} data= {product}/>
        ))}
      </div>
 
-     <h2>Last Added</h2>
+     <h2 style={{textAlign : "center"}}>Last Added</h2>
      <div className='container'>
        {lastAdded.map((product) => (
          <ProductCard key={product._id} data= {product}/>
        ))}
      </div>
 
-     <h2>Best Offers</h2>
+     <h2 style={{textAlign : "center"}}>Best Offers</h2>
      <div className='container'>
        {bestOffers.map((product) => (
          <ProductCard key={product._id} data= {product}/>

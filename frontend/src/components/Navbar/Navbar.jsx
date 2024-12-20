@@ -165,7 +165,7 @@ function Navbar() {
           </>
         )}
 
-        <div className="hamburger" onClick={sideBar}>
+        <div className="hamburger" onClick={sideBar} >
           <FontAwesomeIcon icon={sideOpen ? faTimes : faBars} size="xl" color="white" />
         </div>
       </div>

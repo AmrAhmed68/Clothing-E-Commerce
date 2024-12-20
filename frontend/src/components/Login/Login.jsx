@@ -48,13 +48,13 @@ const Login = () => {
   };
 
   return (
-    <>
-      <section className='Login-container'>
+      <div className='Login-container'>
         <div className='Login-header'>
           <p>Login</p>
+          <h1> </h1>
         </div>
 
-        <form className="Login-inputs" onSubmit={formik.handleSubmit}>
+        <form className="Login-inputs"   onSubmit={formik.handleSubmit}>
           <div className="Login-input">
             <MdEmail />
             <input
@@ -65,7 +65,7 @@ const Login = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className={formik.errors.username && formik.touched.username ? "input-error" : ""}
-            />
+              />
           </div>
           {formik.touched.username && formik.errors.username && (
             <p className="error-message">{formik.errors.username}</p>
@@ -87,18 +87,15 @@ const Login = () => {
             <p className="error-message">{formik.errors.password}</p>
           )}
 
-          <button type="submit" className="Login-submit">Login to my account</button>
+          <button type="submit" className="Login-submit">Login</button>
         </form>
-
-      </section>
-
-      <section className='Login-container'>
+        
       <div className='Login-header'>
-        <p>Don't have an account?</p>
+        <h2 onClick={handleSignUp} style={{cursor : "pointer"  ,  textDecoration: "underline"}}>Forget Password?</h2>
+        <h2>Don't have an account? <span onClick={handleSignUp} style={{cursor : "pointer" , color : "black"}} >Sign Up</span></h2>
       </div>
-        <button onClick={handleSignUp} className="Login-submit">Sign Up</button>
-      </section>
-    </>
+      </div>
+
   );
 };
 

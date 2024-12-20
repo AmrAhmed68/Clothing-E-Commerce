@@ -41,7 +41,7 @@ function Filter() {
           {hoveredCategory === item.category.name && item.category.subcategory.length > 0 && (
             <div className="subcategory-list">
               {item.category.subcategory.map((subcat, index) => (
-                <button
+                <button className="subcategory"
                   key={index}
                   onClick={() => navigate(`category/${item.category.name}/${subcat}`)}
                 >

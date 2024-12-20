@@ -16,3 +16,124 @@
     font-size: 20px;
     color: #000000;
   }
+  /* Container for the label */
+.review-label {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* Dropdown styling */
+.review-select {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  margin-top: 8px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input {
+  width: 90%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+/* Hover and focus effects */
+.review-select:hover {
+  border-color: #007bff;
+}
+
+.review-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.review-select option {
+  font-size: 14px;
+  padding: 8px;
+  background-color: #fff;
+  color: #333;
+}
+.review-select option[value="0"] {
+  color: #aaa;
+  font-style: italic;
+}
+
+.review-select {
+  transition: all 0.3s ease-in-out;
+}
+
+.add-review-container {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.add-review-container button {
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.add-review-container button:hover {
+  background: #555;
+}
+
+.product-reviews-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.product-reviews-container h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+  
+.review-items {
+  display: flex ;
+  padding: 10px;
+  justify-content: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.review-items input {
+  border-radius: 15px;
+  width: 100%;
+}
+
+.review-item {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-item h4 {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.review-item p {
+  font-size: 1rem;
+  color: #777;
+  margin: 5px 0;
+}

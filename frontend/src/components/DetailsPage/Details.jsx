@@ -5,18 +5,51 @@ import useProduct from "../../hooks/useProduct";
 import ProductReviews from "../Rating/ProductReviews";
 import AddReview from "../Rating/ReviewForm";
 import Review from "../Rating/Review";
+import {useCart} from '../../hooks/CartProvider'
+import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping , faCartArrowDown , faHeart} from '@fortawesome/free-solid-svg-icons';
 
 function Details() {
   const { id } = useParams();
+  const userId = localStorage.getItem("id")
   const { loading, fetchProductById } = useProduct();
   const [product, setProduct] = useState({});
   const [refresh, setRefresh] = useState(false);
+  const {addToCart  , removeFromCart} = useCart();    
+  const [isInCart, setIsInCart] = useState(false);  
+  
 
   const handleReviewAdded = () => setRefresh(!refresh);
 
   useEffect(() => {
-    fetchProductById(id).then((data) => setProduct(data));
-  }, [id]);
+
+      const checkProductInCart = async () => {
+        try {
+          const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/${userId}/cart/${id}`);
+          if (response.data.exists) {
+            setIsInCart(true);
+          } else {
+            setIsInCart(false);
+          }
+        } catch (error) {
+          console.error('Error checking product in cart', error);
+        }
+      };
+  
+      fetchProductById(id).then((data) => setProduct(data));
+      checkProductInCart();
+  }, [id , userId]);
+
+  const handleAddToCart = () => {
+    addToCart(id , 1);
+    setIsInCart(true)
+  };
+
+  const handleRemoveFromCart = () => {
+    removeFromCart(id); 
+    setIsInCart(false)
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -33,11 +66,10 @@ function Details() {
         <p>Colors: <span>{product.color?.join(" , ")}</span></p>
         <p>Sizes: <span>{product.size?.join(" , ")}</span></p>
         <p>Stock: <span>{product.stock > 0 ? product.stock : "Out of Stock"}</span></p>
-      </div>
-
-      <div className="product-reviews-container">
-        <h2>Customer Reviews</h2>
         <ProductReviews productId={id} key={refresh} />
+      <button onClick={isInCart ? handleRemoveFromCart : handleAddToCart}>
+           {isInCart? "Added To Card" : "Add To Card"} 
+            </button>
       </div>
 
       <div className="add-review-container">

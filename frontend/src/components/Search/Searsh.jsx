@@ -11,7 +11,7 @@ function Search() {
     
 
     const filteredProducts = products
-    .filter((item) => item && item.name) // Ensure item and item.name exist
+    .filter((item) => item && item.name) 
     .filter((item) =>
       item.name.toLowerCase().includes(filter.toLowerCase())
     );
@@ -47,8 +47,7 @@ function Search() {
             filteredProducts.map((item) => (
               <div className="search-item" key={item._id} onClick={() => handleDetailsClick(item._id)}>
                 <img src = {item.imageUrl} alt={item.name} />
-                <h4>{item.name}</h4>
-                <p>Price: ${item.price}</p>
+                <h4 >{item.name}</h4>
               </div>
             ))
           ) : (
