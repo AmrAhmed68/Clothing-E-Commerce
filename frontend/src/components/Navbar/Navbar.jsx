@@ -111,10 +111,13 @@ function Navbar() {
                 <button className="button" onClick={handleCart}>
                   Cart
                 </button>
-                <div className="Login"></div>
                 <button className="button" onClick={handleFavourite}>
                   Favourite
                 </button>
+                <button className="button" onClick={() => navigate('/contact-us')}>
+                  Contact Us
+                </button>
+
               </div>
               <div className="filter">
                 <Filter />
@@ -134,6 +137,12 @@ function Navbar() {
             <div className="search">
               <Search />
             </div>
+            <div className="Login">
+            <button className="button" onClick={() => navigate('/contact-us')}>
+                  Contact Us
+                </button>
+            </div>
+            <span>|</span>
             <div className="Login">
               {user ? (
                 <button className="button" onClick={handleProfile}>

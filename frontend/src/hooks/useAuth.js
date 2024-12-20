@@ -45,13 +45,14 @@ const useProvideAuth = () => {
 
   const userData = async (id) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = getToken();
       const response = await axios.get(
         `https://e-commerce-data-one.vercel.app/api/users/${id}`,
         {
           withCredentials: true,
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );

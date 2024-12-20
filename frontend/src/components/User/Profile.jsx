@@ -14,7 +14,7 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState({});
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     const fetchPhoto = async () => {
       try {
@@ -24,7 +24,7 @@ function Profile() {
         console.error('Error fetching photo:', error);
       }
     };
-
+    
     const fetchUser = async () => {
       try {
         const user = await userData(id);
@@ -35,7 +35,6 @@ function Profile() {
         setLoading(false);
       }
     };
-
     fetchUser();
     fetchPhoto();
   }, [id, userData]);

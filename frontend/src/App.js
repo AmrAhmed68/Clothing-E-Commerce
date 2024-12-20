@@ -15,6 +15,8 @@ import CategoryProduct from "./components/FilterProduct/CategoryProduct";
 import AdminDasboard from "./components/Admin/AdminDasboard";
 import AdminRoute from "./isAdmin";
 import Footer from "./components/Footer/Footer";
+import ContactUs from "./components/ContactUs/ContactUs";
+
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
+        <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
