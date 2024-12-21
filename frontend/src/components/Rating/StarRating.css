@@ -109,11 +109,12 @@
   display: flex ;
   padding: 10px;
   justify-content: center;
-  padding: 10px;
+  padding: 20px;
   cursor: pointer;
 }
 
 .review-items input {
+  padding: 20px;
   border-radius: 15px;
   width: 100%;
 }

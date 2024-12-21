@@ -27,7 +27,7 @@ const SignUP = () => {
       .required("Confirm Password is required"),
     email: Yup.string().email("Invalid email address").required("Email is required"),
     phone: Yup.string()
-      .matches(/^\d{10}$/, "Phone number must be 10 digits")
+      .matches(/^\d{11}$/, "Phone number must be 10 digits")
       .required("Phone number is required"),
     age: Yup.number()
       .min(18, "You must be at least 18 years old")
