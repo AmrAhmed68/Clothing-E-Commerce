@@ -4,7 +4,6 @@ import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaPen } from 'react-icons/fa';
 import UploadImage from '../UploadImage/UploadImage';
-import axios from 'axios';
 
 function Profile() {
   const { photo , user, userData, updateUser, logout , fetchPhoto } = useAuth();
@@ -53,8 +52,14 @@ function Profile() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Loading your favourites...</p>
+      </div>
+    );
+  }
   const handleLogout = () => {
     logout();
     navigate('/login');

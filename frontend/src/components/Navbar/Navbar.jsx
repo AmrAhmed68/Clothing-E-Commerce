@@ -15,6 +15,7 @@ function Navbar() {
   const location = useLocation();
   const sidebarRef = useRef(null);
   const userId = localStorage.getItem('id');
+  const isAdmin = localStorage.getItem('isAdmin');
 
 
   const checkScreenSize = () => {
@@ -61,6 +62,8 @@ function Navbar() {
   const handleProfile = () => {
     navigate(`/profile/${localStorage.getItem('id')}`);
   };
+
+  console.log(isAdmin)
 
   const hideFilter =
     location.pathname === '/admin' ||
@@ -144,6 +147,15 @@ function Navbar() {
             <div className="search">
               <Search />
             </div>
+            {
+              isAdmin ? 
+              <div className="Login">
+            <button className="button" onClick={() => navigate('/admin')}>
+                  Admin Dasboard
+                </button>
+                <span>|</span> 
+            </div> : null
+          }
             <div className="Login">
             <button className="button" onClick={() => navigate('/contact-us')}>
                   Contact Us
