@@ -147,15 +147,6 @@ function Navbar() {
             <div className="search">
               <Search />
             </div>
-            {
-              isAdmin ? 
-              <div className="Login">
-            <button className="button" onClick={() => navigate('/admin')}>
-                  Admin Dasboard
-                </button>
-                <span>|</span> 
-            </div> : null
-          }
             <div className="Login">
             <button className="button" onClick={() => navigate('/contact-us')}>
                   Contact Us
