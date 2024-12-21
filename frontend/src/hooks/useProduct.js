@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api/products';
+const API_BASE_URL = 'https://clothing-e-commerce-six.vercel.app/api/products';
 
 const useProduct = () => {
   const [products, setProducts] = useState([]);
