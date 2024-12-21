@@ -8,6 +8,21 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   font-family: 'Roboto', sans-serif;
   color: #333;
+  justify-content: center;
+  text-align: center;
+}
+
+.profile-submit {
+  background-color: #4B5F6C;
+  color: #fff;
+  padding: 15px;
+  border-radius: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 30px;
 }
 
 /* Header styling */

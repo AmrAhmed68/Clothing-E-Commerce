@@ -19,6 +19,9 @@ export const CartProvider = ({ children }) => {
   }, [userId]);
 
   const fetchCart = async () => {
+    if(!userId){
+      return <p className="no-favourites">You are not logged in!</p>;
+    }
     setLoading(true);
     try {
       const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/${userId}/cart`);

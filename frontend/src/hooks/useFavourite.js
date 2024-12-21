@@ -9,6 +9,9 @@ const useFavourite = (userId) => {
   const [loading, setLoading] = useState(false);
 
   const fetchFavourite = async () => {
+    if(!userId){
+      return <p className="no-favourites">You are not logged in!.</p>;
+    }
     setLoading(true);
     try {
       const response = await axios.get(`${API_BASE_URL}/${userId}`);

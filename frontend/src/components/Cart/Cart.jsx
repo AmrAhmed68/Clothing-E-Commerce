@@ -3,6 +3,7 @@ import {useCart} from '../../hooks/CartProvider';
 import './Cart.css'; // Import the CSS file
 
 const Cart = () => {
+  const userId = localStorage.getItem('id');
   const { cart , totalPrice, fetchCart, removeFromCart, updateQuantity , loading , error} = useCart();
 
   useEffect(() => {
@@ -20,9 +21,14 @@ const Cart = () => {
 
   if (error) return <p className="error-message">{error}</p>; 
 
-  if (cart.length === 0) {
+  if (!userId ) {
+    return <p className="no-favourites">You are not logged in!</p>;
+  }
+  
+  if (cart.length === 0 ) {
     return <p className="no-favourites">You have no cart items.</p>;
   }
+
 
 
   return (

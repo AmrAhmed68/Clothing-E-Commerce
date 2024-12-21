@@ -97,7 +97,7 @@ function Profile() {
           </div>
         ))}
       </div>
-      <button onClick={handleLogout}>Logout</button>
+      <button className="profile-submit" onClick={handleLogout}>Logout</button>
     </div>
   );
 }

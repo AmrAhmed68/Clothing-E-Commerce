@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import './SignUP.css';
@@ -10,6 +10,8 @@ import { FaPhoneAlt } from "react-icons/fa";
 
 const SignUP = () => {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+
 
   const validationSchema = Yup.object({
     username: Yup.string()
@@ -46,16 +48,27 @@ const SignUP = () => {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await axios.post("https://e-commerce-data-one.vercel.app/api/register", values);
-        console.log(response.data);
-        resetForm();
-        navigate("/Login");
+        // Check if username and email are unique
+        const uniqueCheck = await axios.post("https://e-commerce-data-one.vercel.app/api/checkUnique", {
+          username: values.username,
+          email: values.email,
+        });
+
+        if (uniqueCheck.status === 200) {
+          // Proceed with registration
+          const response = await axios.post("https://e-commerce-data-one.vercel.app/api/register", values);
+          console.log(response.data);
+          resetForm();
+          navigate("/login");
+        }
       } catch (error) {
-        console.error("Error submitting data:", error.response?.data?.error);
-        formik.setErrors({ submit: error.response?.data?.error || "An error occurred during sign up" });
+        const errorMsg = error.response?.data?.error || "An error occurred during sign up";
+        setErrorMessage(errorMsg);
+        formik.setErrors({ submit: errorMsg });
       }
     },
   });
+
 
   const handleLogIn = () => {
     navigate('/login');
@@ -160,6 +173,7 @@ const SignUP = () => {
           <button type="submit" className="Signup-submit">
             Register
           </button>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
         <div className='Login-header'>
         <h2>Already have an account? <span onClick={handleLogIn} style={{cursor : "pointer" , color : "black"}} >LogIn</span></h2>

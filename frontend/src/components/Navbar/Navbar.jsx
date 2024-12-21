@@ -11,9 +11,11 @@ function Navbar() {
   const [sideOpen, setSideOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const navigate = useNavigate();
-  const { user, loading , photo} = useAuth();
+  const { user, loading , photo , fetchPhoto} = useAuth();
   const location = useLocation();
   const sidebarRef = useRef(null);
+  const userId = localStorage.getItem('id');
+
 
   const checkScreenSize = () => {
     setIsMobile(window.innerWidth < 800);
@@ -21,6 +23,7 @@ function Navbar() {
 
   useEffect(() => {
     checkScreenSize();
+    fetchPhoto(userId)
     window.addEventListener('resize', checkScreenSize);
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
@@ -147,7 +150,7 @@ function Navbar() {
             <div className="Login">
               {user ? (
                 <button className="button" onClick={handleProfile}>
-                  Hi {user.username}!
+                  Hi {user.username} !
                 </button>
               ) : (
                 <button className="button" onClick={handleLogin}>

@@ -12,6 +12,7 @@ const upload = require("../middleware/multer");
 routers.get("/users/:id", authenticateToken, authController.getUserById);
 routers.get("/photo/:id", authController.getUserPhoto);
 routers.post("/register", authController.register);
+routers.post("/checkUnique", authController.checkUniqueFields);
 routers.post("/login", passport.authenticate("local"), authController.login);
 routers.post("/photo/:id",upload.single("profilePhoto"),authController.uploadPhoto);
 routers.put("/updateProfile/:id",authenticateToken,authController.updateUserProfile);

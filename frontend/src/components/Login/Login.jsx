@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import './Login.css';
@@ -10,6 +10,8 @@ import { useAuth } from '../../hooks/useAuth';
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+
 
   const validationSchema = Yup.object({
     username: Yup.string()
@@ -35,10 +37,11 @@ const Login = () => {
           console.log('Login successful:', result.user);
           navigate('/');
         } else {
-          console.error('Login failed:', result.message);
+          setErrorMessage(result.message || "Invalid credentials");
         }
       } catch (err) {
         console.error('Error:', err);
+        setErrorMessage(err.response?.data?.message || 'Invalid credentials');
       }
     },
   });
@@ -88,6 +91,7 @@ const Login = () => {
           )}
 
           <button type="submit" className="Login-submit">Login</button>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
         
       <div className='Login-header'>

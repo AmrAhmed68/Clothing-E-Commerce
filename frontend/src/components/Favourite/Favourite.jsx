@@ -21,6 +21,10 @@ function Favourite({ userId }) {
 
   if (error) return <p className="error-message">{error}</p>; // Show error message
 
+  if (!id ) {
+    return <p className="no-favourites">You are not logged in!</p>;
+  }
+
   if (favourite.length === 0) {
     return <p className="no-favourites">You have no favourite items.</p>;
   }

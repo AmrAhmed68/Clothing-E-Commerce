@@ -128,11 +128,10 @@
     
 @media (max-width: 800px) {
     .signup-container {
-      width: 60%; /* Adjust width for smaller screens */
+      width: 90%; 
       padding: 15px; 
       margin-bottom: 30px ;
-      margin-left: 10%;
-
+      margin-left: 4%;
     }
   
     .signup-header p {
@@ -144,6 +143,16 @@
     }
   
     .Singup-submit {
-      padding: 10px;
+      background-color: #4B5F6C;
+  color: #fff;
+  padding: 15px;
+  width: 70%;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 30px;
     }
   }

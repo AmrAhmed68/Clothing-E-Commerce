@@ -9,7 +9,7 @@ function CategoryProduct() {
     
     useEffect(() => {
         fetchCategory(categoryName);
-    }, []);
+    }, [categoryName]);
     
     const Product = Array.isArray(cproduct)
     ? cproduct.map((e) => <ProductCard key={e._id} data={e} />)

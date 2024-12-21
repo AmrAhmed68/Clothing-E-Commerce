@@ -20,11 +20,11 @@ exports.login = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       console.error("Authentication error:", err.message);
-      return res.status(500).json({ message: "Internal server error" , error: err.message});
+      return res.status(500).json({ message: "Internal server error" , error: 'Invalid credentials'});
     }
     if (!user) {
       console.log("Authentication failed:", err.message);
-      return res.status(401).json({ message: err.message || 'Invalid credentials'});
+      return res.status(401).json({ message: 'Invalid credentials'});
     }
 
       req.logIn(user, (err) => {
@@ -159,6 +159,31 @@ exports.uploadPhoto = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
+exports.checkUniqueFields = async (req, res) => {
+  const { username, email } = req.body;
+
+  try {
+    const existingUser = await User.findOne({
+      $or: [{ username }, { email }],
+    });
+
+    if (existingUser) {
+      if (existingUser.username === username) {
+        return res.status(400).json({ error: "Username is already taken." });
+      }
+      if (existingUser.email === email) {
+        return res.status(400).json({ error: "Email is already in use." });
+      }
+    }
+
+    res.status(200).json({ message: "Fields are unique." });
+  } catch (error) {
+    console.error("Error checking unique fields:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 
 
 

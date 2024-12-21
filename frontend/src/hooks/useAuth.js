@@ -38,7 +38,7 @@ const useProvideAuth = () => {
     } catch (error) {
       console.error(
         "Error during login:",
-        error.message
+        'Invalid credentials'
       );
       throw error;
     }
