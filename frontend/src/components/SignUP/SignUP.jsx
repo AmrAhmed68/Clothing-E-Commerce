@@ -46,7 +46,7 @@ const SignUP = () => {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await axios.post("http://localhost:8000/api/register", values);
+        const response = await axios.post("https://e-commerce-data-one.vercel.app/api/register", values);
         console.log(response.data);
         resetForm();
         navigate("/Login");

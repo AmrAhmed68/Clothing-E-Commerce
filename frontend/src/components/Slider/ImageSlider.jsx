@@ -11,7 +11,7 @@ function ImageSlider() {
     const fetchImages = async () => {
       setLoading(true)
       try {
-        const response = await axios.get('http://localhost:8000/api/slider');
+        const response = await axios.get('https://e-commerce-data-one.vercel.app/api/slider');
         setImages(response.data);
         setLoading(false);
       } catch (error) {

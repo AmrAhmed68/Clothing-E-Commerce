@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import './StarRating.css'
 
 
-const API_BASE_URL = "http://localhost:8000/api";
+const API_BASE_URL = "https://e-commerce-data-one.vercel.app/api";
 
 const ReviewForm = ({ productId, onReviewAdded }) => {
   const id = localStorage.getItem("id")

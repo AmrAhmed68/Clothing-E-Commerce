@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = 'https://clothing-e-commerce-six.vercel.app/api/products';
+const API_BASE_URL = 'https://e-commerce-data-one.vercel.app/api/products';
 
 const useProduct = () => {
   const [products, setProducts] = useState([]);
@@ -14,7 +14,7 @@ const useProduct = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`http://localhost:8000/api/subcategory/${categoryName}`, {
+      const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/subcategory/${categoryName}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -30,7 +30,7 @@ const useProduct = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`http://localhost:8000/api/subcategory/${categoryName}/${subcategoryName}`, {
+      const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/subcategory/${categoryName}/${subcategoryName}`, {
         headers: {
           'Content-Type': 'application/json',
         },

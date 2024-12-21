@@ -94,7 +94,7 @@ function Navbar() {
                         Hi {user.username} !
                       </button>
                       <img className="profile"
-                        src={`http://localhost:8000/${photo}`}
+                        src={`https://e-commerce-data-one.vercel.app/${photo}`}
                         alt="profilePhoto"
                       />
                     </>

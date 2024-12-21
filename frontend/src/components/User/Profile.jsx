@@ -66,7 +66,7 @@ function Profile() {
       <div className="profile-header">
         {photo ?  
         <img
-        src={`http://localhost:8000/${photo}`}
+        src={`https://e-commerce-data-one.vercel.app/${photo}`}
         alt="Profile"
         style={{ width: '150px', height: '150px', borderRadius: '50%' }}
       />

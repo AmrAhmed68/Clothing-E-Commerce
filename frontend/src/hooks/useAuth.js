@@ -19,7 +19,7 @@ const useProvideAuth = () => {
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
+      const response = await axios.post("https://e-commerce-data-one.vercel.app/api/login", {
         username,
         password,
       });
@@ -47,7 +47,7 @@ const useProvideAuth = () => {
   const fetchPhoto = async (id) => {
     setLoading(true)
     try {
-      const response = await axios.get(`http://localhost:8000/api/photo/${id}`);
+      const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/photo/${id}`);
       setPhoto(response.data);
     } catch (error) {
       console.error('Error fetching photo:', error);
@@ -61,7 +61,7 @@ const useProvideAuth = () => {
     try {
       const token = getToken();
       const response = await axios.get(
-        `http://localhost:8000/api/users/${id}`,
+        `https://e-commerce-data-one.vercel.app/api/users/${id}`,
         {
           withCredentials: true,
           headers: {
@@ -85,7 +85,7 @@ const useProvideAuth = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.put(
-        `http://localhost:8000/api/updateProfile/${id}`,
+        `https://e-commerce-data-one.vercel.app/api/updateProfile/${id}`,
         updatedData,
         {
           headers: {
@@ -135,7 +135,7 @@ const useProvideAuth = () => {
       setUser(JSON.parse(storedUser));
     } else if (token) {
       axios
-        .get("http://localhost:8000/api/user", {
+        .get("https://e-commerce-data-one.vercel.app/api/user", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
