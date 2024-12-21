@@ -7,9 +7,9 @@ const Footer = () => {
       <div className="footer-container">
         {/* Logo and About Section */}
         <div className="footer-section about">
-          <h3>ShopEase</h3>
+          <h3>BAZARO</h3>
           <p>
-            ShopEase is your one-stop shop for the latest trends and best deals. 
+          BAZARO is your one-stop shop for the latest trends and best deals. 
             Discover quality products and enjoy a seamless shopping experience.
           </p>
         </div>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 
-const API_BASE_URL = 'https://e-commerce-data-one.vercel.app/api';
+const API_BASE_URL = 'http://localhost:8000/api';
 
 const useAdmin = () => {
   const [data, setData] = useState([]);
@@ -50,18 +50,21 @@ const useAdmin = () => {
           headers: { Authorization: `Bearer ${token}` },
       });
       setPhoto(response.data);
+      fetchPhoto()
     } catch (err) {
       setError(err.response?.data?.message || 'Error adding item');
     }
   };
 
   const addItem = async (item) => {
+    
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(`${API_BASE_URL}/products`, item, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setData((prev) => [...prev, response.data]);
+      fetchData()
     } catch (err) {
       setError(err.response?.data?.message || 'Error adding item');
     }
@@ -76,6 +79,7 @@ const useAdmin = () => {
       setData((prev) =>
         prev.map((item) => (item._id === id ? response.data : item))
       );
+      fetchData()
     } catch (err) {
       setError(err.response?.data?.message || 'Error editing item');
     }
@@ -95,6 +99,7 @@ const useAdmin = () => {
             headers: { Authorization: `Bearer ${token}` },
           });
           setData((prev) => prev.filter((item) => item._id !== id));
+          fetchData()
         }
       });
     } catch (err) {
@@ -118,6 +123,7 @@ const useAdmin = () => {
           setPhoto((prev) => prev.filter((item) => item._id !== id));
         }
       });
+      fetchPhoto()
     } catch (err) {
       setError(err.response?.data?.message || 'Error deleting item');
     }

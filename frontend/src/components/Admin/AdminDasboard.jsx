@@ -7,7 +7,7 @@ import './Admin.css'
 import axios from "axios";
 
 function AdminDasboard() {
-    const {data, fetchData, addItem, deleteItem , editItem , photo  ,fetchPhoto , deletePhoto , addPhoto } = useAdmin()
+    const {data, fetchData, addItem, deleteItem , editItem , photo  ,fetchPhoto , deletePhoto , addPhoto , loading , error} = useAdmin()
     const [currentProduct, setCurrentProduct] = useState(null); 
     const [message, setMessage] = useState(''); 
     const [image, setImage] = useState(""); 
@@ -24,11 +24,22 @@ function AdminDasboard() {
       brand: "",
       imageUrl: "",
     });
-  
+
     useEffect(() => {
       fetchData()
       fetchPhoto()
-    }, [photo]);
+    }, []);
+
+    if (loading) {
+      return (
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      );
+    }
+
+    if (error) return <p className="error-message">{error}</p>; 
   
     const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -57,7 +68,7 @@ function AdminDasboard() {
       try {
           const token = localStorage.getItem('token');
         const response = await axios.put(
-          `https://e-commerce-data-one.vercel.app/api/section`,
+          `http://localhost:8000/api/section`,
           { section : section , productId : Id} ,
           { headers: { Authorization: `Bearer ${token}`} }
         );

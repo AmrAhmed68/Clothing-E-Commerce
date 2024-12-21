@@ -2,22 +2,28 @@ import React, { useEffect, useState } from 'react'
 import ImageSlider from '../Slider/ImageSlider';
 import axios from 'axios';
 import ProductCard from '../ProductCard/ProductCard'
+import './Home.css'
 
 
 function Home() {
   const [mostPopular, setMostPopular] = useState([]);
   const [lastAdded, setLastAdded] = useState([]);
   const [bestOffers, setBestOffers] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
       const fetchProductsBySection = async (section, setter) => {
+        setLoading(true)
         try {
           const response = await axios.get(
-            `https://e-commerce-data-one.vercel.app/api/section/${section}`
+            `http://localhost:8000/api/section/${section}`
           );
           setter(response.data);
         } catch (err) {
           console.error(`Error fetching ${section} products:`, err);
+        } finally{
+          setLoading(false)
         }
       };
   
@@ -25,6 +31,24 @@ function Home() {
       fetchProductsBySection("Last Added", setLastAdded);
       fetchProductsBySection("Best Offers", setBestOffers);
     }, []);
+
+    if (loading) {
+      return (
+        <div className="loading-container">
+          <div className="spinner"></div>
+        </div>
+      );
+    }
+
+    if (mostPopular.length === 0) {
+      return <p className="no-favourites">You have no  items.</p>;
+    }
+    if (lastAdded.length === 0) {
+      return <p className="no-favourites">You have no  items.</p>;
+    }
+    if (bestOffers.length === 0) {
+      return <p className="no-favourites">You have no  items.</p>;
+    }
 
   return (
     <>

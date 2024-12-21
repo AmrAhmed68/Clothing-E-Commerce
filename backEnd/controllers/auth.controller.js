@@ -119,8 +119,9 @@ exports.getUserPhoto = async (req, res) => {
   try {
     const user = await User.findById(id);
 
+    // Check if user exists and has a profile photo
     if (!user || !user.profilePhoto) {
-      return res.status(404).json({ message: 'Photo not found' });
+      return res.json(false); // Return false if no photo exists
     }
 
     // Validate and set Content-Type header
@@ -131,27 +132,33 @@ exports.getUserPhoto = async (req, res) => {
     res.send(user.profilePhoto);
   } catch (error) {
     console.error('Error retrieving photo from database:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    // Return false instead of error response
+    res.json(false);
   }
 };
 
 exports.uploadPhoto = async (req, res) => {
-  try {
-    const userId = req.params.id;
-    const user = await User.findById(userId);
+  const { id } = req.params;
 
-    if (!user || !user.profilePhoto) {
-      return res.status(404).json({ message: "Photo not found" });
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
     }
 
     user.profilePhoto = req.file.path;
     await user.save();
 
-    res.status(200).json({ message: 'Profile photo uploaded successfully', user });
+    res.status(200).json({ message: "Profile photo uploaded successfully", user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error', error });
+    res.status(500).json({ message: "Server error", error });
   }
 };
+
 
 

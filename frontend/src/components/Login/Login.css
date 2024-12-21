@@ -5,9 +5,8 @@
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative; /* Make it an absolutely positioned element */
-  top: 50%; /* Move it to the center vertically */
-  left: 50%; /* Move it to the center horizontally */
-  transform: translate(-50%, 2.5%); /* Adjust position to perfectly center it */
+  margin-top: 30px;
+  margin-left: 20%;
 }
 
 .Login-header {
@@ -122,8 +121,9 @@
 
 @media screen and (max-width: 800px) {
   .Login-container {
-    width: 90%; /* Adjust width for smaller screens */
-    padding: 15px; /* Add some padding */
+    width: 60%; 
+    padding: 15px; 
+    margin-bottom: 30px ;
   }
 
   .Login-header p {

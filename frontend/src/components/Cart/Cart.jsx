@@ -3,11 +3,27 @@ import {useCart} from '../../hooks/CartProvider';
 import './Cart.css'; // Import the CSS file
 
 const Cart = () => {
-  const { cart , totalPrice, fetchCart, removeFromCart, updateQuantity } = useCart();
+  const { cart , totalPrice, fetchCart, removeFromCart, updateQuantity , loading , error} = useCart();
 
   useEffect(() => {
     fetchCart();
-  }, [cart]);  
+  }, []);  
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Loading your cart...</p>
+      </div>
+    );
+  }
+
+  if (error) return <p className="error-message">{error}</p>; 
+
+  if (cart.length === 0) {
+    return <p className="no-favourites">You have no cart items.</p>;
+  }
+
 
   return (
     <div className="cart-container">

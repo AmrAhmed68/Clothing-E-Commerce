@@ -1,66 +1,57 @@
 .contact-us {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f8fafc; /* Light gray background */
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contact-us h1 {
-    font-size: 2rem;
-    color: #1e293b;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  
-  .contact-us p {
-    color: #64748b;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .contact-us .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .contact-us .form-group label {
-    display: block;
-    font-weight: 600;
-    color: #334155;
-    margin-bottom: 5px;
-  }
-  
-  .contact-us .form-group input,
-  .contact-us .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .contact-us .form-group input:focus,
-  .contact-us .form-group textarea:focus {
-    border-color: #3b82f6;
-    outline: none;
-  }
-  
-  .contact-us button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #3b82f6;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .contact-us button:hover {
-    background-color: #2563eb;
-  }
-  
+  padding: 40px;
+  background-color: #f9f9f9;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.contact-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.contact-description {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.contact-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.contact-icon {
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.contact-card-title {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.contact-card-description {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}

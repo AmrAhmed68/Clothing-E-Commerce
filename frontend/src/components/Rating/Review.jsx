@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import StarRating from "./StarRating";
 
-const API_BASE_URL = "https://e-commerce-data-one.vercel.app/api";
+const API_BASE_URL = "http://localhost:8000/api";
 function Review({ productId }) {
   const [reviews, setReviews] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
@@ -19,7 +19,7 @@ function Review({ productId }) {
     };
 
     fetchReviews();
-  }, [productId,reviews ]);
+  }, [productId]);
   return (
     <div>
        <ul>

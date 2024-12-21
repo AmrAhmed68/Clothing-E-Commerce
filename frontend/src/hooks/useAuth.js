@@ -15,10 +15,11 @@ export const useAuth = () => {
 const useProvideAuth = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [photo, setPhoto] = useState({});
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post("https://e-commerce-data-one.vercel.app/api/login", {
+      const response = await axios.post("http://localhost:8000/api/login", {
         username,
         password,
       });
@@ -43,15 +44,28 @@ const useProvideAuth = () => {
     }
   };
 
+  const fetchPhoto = async (id) => {
+    setLoading(true)
+    try {
+      const response = await axios.get(`http://localhost:8000/api/photo/${id}`);
+      setPhoto(response.data);
+    } catch (error) {
+      console.error('Error fetching photo:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+
   const userData = async (id) => {
     try {
       const token = getToken();
       const response = await axios.get(
-        `https://e-commerce-data-one.vercel.app/api/users/${id}`,
+        `http://localhost:8000/api/users/${id}`,
         {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
@@ -71,7 +85,7 @@ const useProvideAuth = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.put(
-        `https://e-commerce-data-one.vercel.app/api/updateProfile/${id}`,
+        `http://localhost:8000/api/updateProfile/${id}`,
         updatedData,
         {
           headers: {
@@ -121,7 +135,7 @@ const useProvideAuth = () => {
       setUser(JSON.parse(storedUser));
     } else if (token) {
       axios
-        .get("https://e-commerce-data-one.vercel.app/api/user", {
+        .get("http://localhost:8000/api/user", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
@@ -137,6 +151,8 @@ const useProvideAuth = () => {
   }, []);
 
   return {
+    fetchPhoto,
+    photo,
     isAdmin,
     updateUser,
     user,

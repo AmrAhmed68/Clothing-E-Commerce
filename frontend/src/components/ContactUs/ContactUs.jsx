@@ -1,27 +1,44 @@
-import React from 'react'
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone, faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import "./ContactUs.css";
 
 function ContactUs() {
+  const contactDetails = [
+    {
+      icon: faPhone,
+      title: "Call Us",
+      description: "+1 (555) 123-4567",
+    },
+    {
+      icon: faEnvelope,
+      title: "Email Us",
+      description: "support@yourcompany.com",
+    },
+    {
+      icon: faMapMarkerAlt,
+      title: "Visit Us",
+      description: "1234 Market Street, Suite 567, San Francisco, CA",
+    },
+  ];
+
   return (
     <div className="contact-us">
-    <h1>Contact Us</h1>
-    <p>We would love to hear from you! Please use the form below to reach out to us.</p>
-    <form>
-      <div className="form-group">
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" placeholder="Your Name" />
+      <h1 className="contact-title">Contact Us</h1>
+      <p className="contact-description">
+        We'd love to hear from you! Reach out to us via any of the following methods:
+      </p>
+      <div className="contact-cards">
+        {contactDetails.map((detail, index) => (
+          <div className="contact-card" key={index}>
+            <FontAwesomeIcon icon={detail.icon} size="2x" className="contact-icon" />
+            <h2 className="contact-card-title">{detail.title}</h2>
+            <p className="contact-card-description">{detail.description}</p>
+          </div>
+        ))}
       </div>
-      <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" placeholder="Your Email" />
-      </div>
-      <div className="form-group">
-        <label htmlFor="message">Message</label>
-        <textarea id="message" placeholder="Your Message" rows="5"></textarea>
-      </div>
-      <button type="submit">Send Message</button>
-    </form>
-  </div>
-  )
+    </div>
+  );
 }
 
-export default ContactUs
+export default ContactUs;

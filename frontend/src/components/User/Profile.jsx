@@ -7,8 +7,7 @@ import UploadImage from '../UploadImage/UploadImage';
 import axios from 'axios';
 
 function Profile() {
-  const { user, userData, updateUser, logout } = useAuth();
-  const [photo, setPhoto] = useState({});
+  const { photo , user, userData, updateUser, logout , fetchPhoto } = useAuth();
   const { id } = useParams();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -16,15 +15,6 @@ function Profile() {
   const navigate = useNavigate();
   
   useEffect(() => {
-    const fetchPhoto = async () => {
-      try {
-        const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/photo/${id}`);
-        setPhoto(response.data);
-      } catch (error) {
-        console.error('Error fetching photo:', error);
-      }
-    };
-    
     const fetchUser = async () => {
       try {
         const user = await userData(id);
@@ -36,8 +26,8 @@ function Profile() {
       }
     };
     fetchUser();
-    fetchPhoto();
-  }, [id, userData]);
+    fetchPhoto(id);
+  }, [id]);
 
   const handleEditClick = (field) => {
     setIsEditing((prev) => ({ ...prev, [field]: true }));
@@ -70,17 +60,19 @@ function Profile() {
     navigate('/login');
   };
 
+
   return (
     <div className="profile-container">
       <div className="profile-header">
-        {photo && (
-          <img
-            src={`https://e-commerce-data-one.vercel.app/${photo}`}
-            alt="Profile"
-            style={{ width: '150px', height: '150px', borderRadius: '50%' }}
-          />
-        )}
-        {!photo && <UploadImage />}
+        {photo ?  
+        <img
+        src={`http://localhost:8000/${photo}`}
+        alt="Profile"
+        style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+      />
+        : 
+        <UploadImage /> 
+        }
         <h1>{user.username}</h1>
       </div>
       <div className="profile-info">

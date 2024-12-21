@@ -46,7 +46,7 @@ const SignUP = () => {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await axios.post("https://e-commerce-data-one.vercel.app/api/register", values);
+        const response = await axios.post("http://localhost:8000/api/register", values);
         console.log(response.data);
         resetForm();
         navigate("/Login");
@@ -170,105 +170,3 @@ const SignUP = () => {
 };
 
 export default SignUP;
-{/* <section className='signup-container'>
-        <div className='signup-header'>
-          <p>Sign Up</p>
-          <h1> </h1>
-        </div>
-        <form className="signup-inputs" onSubmit={formik.handleSubmit}>
-          
-          <div className={`signup-input ${formik.errors.username ? "input-error" : ""}`} >
-            <MdOutlineAccountCircle />
-            <input
-              type="text"
-              placeholder="Username"
-              {...formik.getFieldProps("username")}
-            />
-            </div>
-            {formik.touched.username && formik.errors.username && (
-              <p className="error-message">{formik.errors.username}</p>
-            )}
-
-          <div className={`signup-input ${formik.errors.password ? "input-error" : ""}`}>
-            <RiLockPasswordFill />
-            <input
-              type="password"
-              placeholder="Password"
-              {...formik.getFieldProps("password")}
-            />
-            </div>
-            {formik.touched.password && formik.errors.password && (
-              <p className="error-message">{formik.errors.password}</p>
-            )}
-
-          <div className={`signup-input ${formik.errors.retypePassword ? "input-error" : ""}`}>
-            <RiLockPasswordFill />
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              {...formik.getFieldProps("retypePassword")}
-            />
-            </div>
-            {formik.touched.retypePassword && formik.errors.retypePassword && (
-              <p className="error-message">{formik.errors.retypePassword}</p>
-            )}
-
-          <div className={`signup-input ${formik.errors.email ? "input-error" : ""}`}>
-            <MdEmail />
-            <input
-              type="email"
-              placeholder="Email"
-              {...formik.getFieldProps("email")}
-            />
-            </div>
-            {formik.touched.email && formik.errors.email && (
-              <p className="error-message">{formik.errors.email}</p>
-            )}
-
-          <div className={`signup-input ${formik.errors.phone ? "input-error" : ""}`}>
-            <FaPhoneAlt />
-            <input
-              type="text"
-              placeholder="Phone number"
-              {...formik.getFieldProps("phone")}
-            />
-          </div>
-            {formik.touched.phone && formik.errors.phone && (
-              <p className="error-message">{formik.errors.phone}</p>
-            )}
-
-          <div className={`signup-input ${formik.errors.age ? "input-error" : ""}`}>
-            <MdOutlineAccountCircle />
-            <input
-              type="text"
-              placeholder="Age"
-              {...formik.getFieldProps("age")}
-            />
-            </div>
-            {formik.touched.age && formik.errors.age && (
-              <p className="error-message">{formik.errors.age}</p>
-            )}
-
-          <div className={`signup-input ${formik.errors.gender ? "input-error" : ""}`}>
-            <select
-              {...formik.getFieldProps("gender")}
-              defaultValue=""
-            >
-              <option value="" disabled>Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-            </div>
-            {formik.touched.gender && formik.errors.gender && (
-              <p className="error-message">{formik.errors.gender}</p>
-            )}
-
-          {formik.errors.submit && (
-            <p className="error-message">{formik.errors.submit}</p>
-          )}
-
-          <button type="submit" className="Signup-submit">
-            Register
-          </button>
-        </form>
-      </section> * */}

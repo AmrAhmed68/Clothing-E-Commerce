@@ -11,7 +11,7 @@ function Navbar() {
   const [sideOpen, setSideOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user, loading , photo} = useAuth();
   const location = useLocation();
   const sidebarRef = useRef(null);
 
@@ -90,14 +90,13 @@ function Navbar() {
                 <>
                   {user ? (
                     <>
-                      <img
-                        src={`https://e-commerce-data-one.vercel.app/${user.profilePhoto}`}
-                        alt="profilePhoto"
-                        style={{ width: '20%' }}
-                      />
-                      <button className="button" onClick={handleProfile}>
-                        Hi {user.username}!
+                      <button className="button" style = {{fontSize : "20px"}} onClick={handleProfile}>
+                        Hi {user.username} !
                       </button>
+                      <img className="profile"
+                        src={`http://localhost:8000/${photo}`}
+                        alt="profilePhoto"
+                      />
                     </>
                   ) : (
                     <button className="button" onClick={handleLogin}>
@@ -106,6 +105,8 @@ function Navbar() {
                   )}
                 </>
               )}
+
+              <h1> </h1>
 
               <div className="Login">
                 <button className="button" onClick={handleCart}>

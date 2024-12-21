@@ -26,7 +26,7 @@ function Details() {
 
       const checkProductInCart = async () => {
         try {
-          const response = await axios.get(`https://e-commerce-data-one.vercel.app/api/${userId}/cart/${id}`);
+          const response = await axios.get(`http://localhost:8000/api/${userId}/cart/${id}`);
           if (response.data.exists) {
             setIsInCart(true);
           } else {

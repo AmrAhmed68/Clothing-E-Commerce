@@ -8,19 +8,30 @@ function ImageSlider() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch images from backend API
     const fetchImages = async () => {
+      setLoading(true)
       try {
-        const response = await axios.get('https://e-commerce-data-one.vercel.app/api/slider');
+        const response = await axios.get('http://localhost:8000/api/slider');
         setImages(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching images:', error);
         setLoading(false);
+      } finally {
+        setLoading(false);
       }
     };
     fetchImages();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   const settings = {
     dots: true,
@@ -36,10 +47,6 @@ function ImageSlider() {
     fade: true, 
     cssEase: 'linear',
   };
-
-  if (loading) {
-    return <div className="loading">Loading...</div>;
-  }
 
   return (
     <div className="slider-container">

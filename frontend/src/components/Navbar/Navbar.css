@@ -15,6 +15,18 @@
     flex-wrap: wrap;
 }
 
+.profile {
+  width: 90%; /* Set the width */
+  height: 150px; /* Set the height */
+  object-fit: cover; /* Ensures the photo fits inside the circle */
+  border-radius: 50%; /* Makes the image circular */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow */
+}
+
+.profile {
+  transform: scale(1.05);
+}
+
 .nav-container span {
     margin-left: 20px;
     margin-right: 20px;
