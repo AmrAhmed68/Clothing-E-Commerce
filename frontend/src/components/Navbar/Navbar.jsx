@@ -93,13 +93,16 @@ function Navbar() {
                 <>
                   {user ? (
                     <>
-                      <button className="button" style = {{fontSize : "20px"}} onClick={handleProfile}>
+                      <button className="button" style = {{fontSize : "20px" , marginBottom : "20px"}} onClick={handleProfile}>
                         Hi {user.username} !
                       </button>
+                      {photo ?
                       <img className="profile"
-                        src={`https://e-commerce-data-one.vercel.app/${photo}`}
-                        alt="profilePhoto"
+                      src={`https://e-commerce-data-one.vercel.app/${photo}`}
+                      alt="profilePhoto"
                       />
+                      : null
+                    }
                     </>
                   ) : (
                     <button className="button" onClick={handleLogin}>
