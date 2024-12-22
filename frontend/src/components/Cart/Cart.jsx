@@ -19,14 +19,20 @@ const Cart = () => {
     );
   }
 
-  if (error) return <p className="error-message">{error}</p>; 
+  if (error) return <div className="no-favourites">
+    <p >{error}</p>; 
+    </div>
 
   if (!userId ) {
-    return <p className="no-favourites">You are not logged in!</p>;
+    return <div className="no-favourites">
+      <p >You are not logged in!</p>
+    </div>
   }
   
   if (cart.length === 0 ) {
-    return <p className="no-favourites">You have no cart items.</p>;
+    return <div className="no-favourites">
+    <p >You have no cart items.</p>;
+  </div>
   }
 
 

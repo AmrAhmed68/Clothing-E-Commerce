@@ -136,7 +136,10 @@ const useProvideAuth = () => {
     } else if (token) {
       axios
         .get("https://e-commerce-data-one.vercel.app/api/user", {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { 
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+           },
         })
         .then((response) => {
           setUser(response.data.user);

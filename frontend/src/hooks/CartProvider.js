@@ -13,10 +13,8 @@ export const CartProvider = ({ children }) => {
   const userId = localStorage.getItem('id');
 
   useEffect(() => {
-    if (userId) {
       fetchCart();
-    }
-  }, [userId]);
+  }, []);
 
   const fetchCart = async () => {
     if(!userId){

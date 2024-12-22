@@ -63,13 +63,13 @@ function Navbar() {
     navigate(`/profile/${localStorage.getItem('id')}`);
   };
 
-  console.log(isAdmin)
-
   const hideFilter =
     location.pathname === '/admin' ||
     location.pathname === '/login' ||
     location.pathname === '/signup' ||
     location.pathname.startsWith('/profile');
+
+    const Admin = isAdmin === 'true'
 
   return (
     <>
@@ -147,6 +147,16 @@ function Navbar() {
             <div className="search">
               <Search />
             </div>
+            {
+              Admin ? (
+                <div className="Login">
+                  <button className="button" onClick={() => navigate('/admin')}>
+                    Admin
+                  </button>
+                  <span>|</span>
+                </div>
+              ) : null
+            }
             <div className="Login">
             <button className="button" onClick={() => navigate('/contact-us')}>
                   Contact Us

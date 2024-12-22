@@ -19,15 +19,22 @@ function Favourite({ userId }) {
     );
   }
 
-  if (error) return <p className="error-message">{error}</p>; // Show error message
+  if (error) return <div className="no-favourites">
+  <p >{error}</p>;
+</div>
 
   if (!id ) {
-    return <p className="no-favourites">You are not logged in!</p>;
+    return <div className="no-favourites">
+    <p>You are not logged in!</p>;
+  </div>
   }
 
   if (favourite.length === 0) {
-    return <p className="no-favourites">You have no favourite items.</p>;
-  }
+    return (
+      <div className="no-favourites">
+        <p>No favourites yet!</p>
+      </div>
+    );}
 
   const Product = favourite.map((e) => (
     <ProductCard key={e.productId._id} data={e.productId} />

@@ -17,7 +17,7 @@ function Home() {
         setLoading(true)
         try {
           const response = await axios.get(
-            `https://e-commerce-data-one.vercel.app/api/section/${section}`
+            `http://localhost:8000/api/section/${section}`
           );
           setter(response.data);
         } catch (err) {
@@ -41,13 +41,19 @@ function Home() {
     }
 
     if (mostPopular.length === 0) {
-      return <p className="no-favourites">You have no  items.</p>;
+      return <div className="no-favourites">
+      <p >You have no  items.</p>;
+    </div>
     }
     if (lastAdded.length === 0) {
-      return <p className="no-favourites">You have no  items.</p>;
+      return <div className="no-favourites">
+      <p >You have no  items.</p>;
+    </div>
     }
     if (bestOffers.length === 0) {
-      return <p className="no-favourites">You have no  items.</p>;
+      return <div className="no-favourites">
+      <p>You have no  items.</p>;
+    </div>
     }
 
   return (
