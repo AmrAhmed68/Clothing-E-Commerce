@@ -25,7 +25,7 @@ function Favourite({ userId }) {
 
   if (!id ) {
     return <div className="no-favourites">
-    <p>You are not logged in!</p>;
+    <p>You are not logged in!</p> 
   </div>
   }
 
