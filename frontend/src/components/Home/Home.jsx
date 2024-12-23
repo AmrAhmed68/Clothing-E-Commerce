@@ -12,29 +12,36 @@ function Home() {
   const [loading, setLoading] = useState(false);
 
 
-    useEffect(() => {
-      const fetchProductsBySection = async (section, setter) => {
-        setLoading(true)
-        try {
-          const response = await axios.get(
-            `http://localhost:8000/api/section/${section}`, {
-            withCredentials : true,
+  useEffect(() => {
+    const fetchProductsBySection = async (section, setter) => {
+      setLoading(true);
+      console.log(`Fetching products for section: ${section}`); // Debug log
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/section/${encodeURIComponent(section)}`, // Ensure section is encoded
+          {
+            withCredentials: true,
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-          } })
-          setter(response.data);
-        } catch (err) {
-          console.error(`Error fetching ${section} products:`, err);
-        } finally{
-          setLoading(false)
-        }
-      };
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        );
   
-      fetchProductsBySection("Most Popular", setMostPopular);
-      fetchProductsBySection("Last Added", setLastAdded);
-      fetchProductsBySection("Best Offers", setBestOffers);
-    }, []);
+        console.log(`Response for ${section}:`, response.data); // Log response data
+        setter(response.data);
+      } catch (err) {
+        console.error(`Error fetching ${section} products:`, err.response?.data || err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchProductsBySection('Most Popular', setMostPopular);
+    fetchProductsBySection('Last Added', setLastAdded);
+    fetchProductsBySection('Best Offers', setBestOffers);
+  }, []);
+  
 
     if (loading) {
       return (
