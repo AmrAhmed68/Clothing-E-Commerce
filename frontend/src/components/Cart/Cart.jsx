@@ -31,7 +31,7 @@ const Cart = () => {
   
   if (cart.length === 0 ) {
     return <div className="no-favourites">
-    <p >You have no cart items.</p>;
+    <p >You have no cart items.</p> 
   </div>
   }
 

@@ -79,14 +79,15 @@ function Home() {
      <h2 style={{textAlign : "center"}}>Most Popular</h2>
      {
       mostPopular.length === 0 ? 
+      <div className="no-favourites">
+       <p >You have no  items.</p>
+     </div>
+         : 
      <div className='container'>
        {mostPopular.map((product) => (
          <ProductCard key={product._id} data= {product}/>
        ))}
-     </div> : 
-     <div className="no-favourites">
-     <p >You have no  items.</p>
-   </div>
+     </div> 
      }
 
      <h2 style={{textAlign : "center"}}>Last Added</h2>
