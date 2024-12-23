@@ -65,7 +65,7 @@ const useProvideAuth = () => {
         {
           withCredentials: true,
           headers: {
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }

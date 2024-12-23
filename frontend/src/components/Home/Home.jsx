@@ -17,8 +17,12 @@ function Home() {
         setLoading(true)
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/section/${section}`
-          );
+            `http://localhost:8000/api/section/${section}`, {
+            withCredentials : true,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+          } })
           setter(response.data);
         } catch (err) {
           console.error(`Error fetching ${section} products:`, err);
