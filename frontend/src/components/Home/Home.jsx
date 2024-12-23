@@ -18,13 +18,13 @@ function Home() {
       console.log(`Fetching products for section: ${section}`); // Debug log
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/section/${encodeURIComponent(section)}`, // Ensure section is encoded
+          `https://e-commerce-data-one.vercel.app/api/section/${encodeURIComponent(section)}`, // Ensure section is encoded
           {
             withCredentials: true,
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
+            },  
           }
         );
   
