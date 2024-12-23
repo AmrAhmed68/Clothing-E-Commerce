@@ -15,7 +15,6 @@ function Home() {
   useEffect(() => {
     const fetchProductsBySection = async (section, setter) => {
       setLoading(true);
-      console.log(`Fetching products for section: ${section}`); // Debug log
       try {
         const response = await axios.get(
           `https://e-commerce-data-one.vercel.app/api/section/${encodeURIComponent(section)}`, // Ensure section is encoded
@@ -27,9 +26,7 @@ function Home() {
             },  
           }
         );
-  
-        console.log(`Response for ${section}:`, response.data); // Log response data
-        setter(response.data);
+          setter(response.data);
       } catch (err) {
         console.error(`Error fetching ${section} products:`, err.response?.data || err.message);
       } finally {
