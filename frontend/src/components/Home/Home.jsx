@@ -55,7 +55,7 @@ function Home() {
     //   return <div className="no-favourites">
     //   <p >You have no  items.</p>
     // </div>
-    // }
+    // } 
     // if (lastAdded.length === 0) {
     //   return <div className="no-favourites">
     //   <p >You have no  items.</p>
@@ -71,30 +71,51 @@ function Home() {
     <>
     <div style={{marginTop : "40px"}}>
       <ImageSlider/>
-
+    </div>
+    <div className="container">
+      
     </div>
      <div className="home">
      <h2 style={{textAlign : "center"}}>Most Popular</h2>
+     {
+      mostPopular.length === 0 ? 
      <div className='container'>
        {mostPopular.map((product) => (
          <ProductCard key={product._id} data= {product}/>
        ))}
-     </div>
+     </div> : 
+     <div className="no-favourites">
+     <p >You have no  items.</p>
+   </div>
+     }
 
      <h2 style={{textAlign : "center"}}>Last Added</h2>
-     <div className='container'>
+      {
+      lastAdded.length === 0 ? 
+      <div className='container'>
        {lastAdded.map((product) => (
          <ProductCard key={product._id} data= {product}/>
-       ))}
+        ))}
      </div>
+        :
+     <div className="no-favourites">
+     <p >You have no  items.</p>
+   </div>
+     }
 
      <h2 style={{textAlign : "center"}}>Best Offers</h2>
-     <div className='container'>
+     {
+      bestOffers.length === 0 ? 
+      <div className='container'>
        {bestOffers.map((product) => (
          <ProductCard key={product._id} data= {product}/>
        ))}
-     </div>
-   </div>
+     </div> : 
+     <div className="no-favourites">
+     <p >You have no  items.</p>
+    </div>
+     }
+    </div>
     </>
   )
 }
