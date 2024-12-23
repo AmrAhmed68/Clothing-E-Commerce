@@ -51,21 +51,21 @@ function Home() {
       );
     }
 
-    if (mostPopular.length === 0) {
-      return <div className="no-favourites">
-      <p >You have no  items.</p>;
-    </div>
-    }
-    if (lastAdded.length === 0) {
-      return <div className="no-favourites">
-      <p >You have no  items.</p>;
-    </div>
-    }
-    if (bestOffers.length === 0) {
-      return <div className="no-favourites">
-      <p>You have no  items.</p>;
-    </div>
-    }
+    // if (mostPopular.length === 0) {
+    //   return <div className="no-favourites">
+    //   <p >You have no  items.</p>
+    // </div>
+    // }
+    // if (lastAdded.length === 0) {
+    //   return <div className="no-favourites">
+    //   <p >You have no  items.</p>
+    // </div>
+    // }
+    // if (bestOffers.length === 0) {
+    //   return <div className="no-favourites">
+    //   <p>You have no  items.</p>
+    // </div>
+    // }
 
   return (
     <>
