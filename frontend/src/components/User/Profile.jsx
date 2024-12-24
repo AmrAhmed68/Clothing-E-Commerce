@@ -56,7 +56,7 @@ function Profile() {
     return (
       <div className="loading-container">
         <div className="spinner"></div>
-        <p>Loading your favourites...</p>
+        <p>Loading...</p>
       </div>
     );
   }
