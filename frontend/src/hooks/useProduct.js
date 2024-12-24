@@ -10,7 +10,7 @@ const useProduct = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchCategory = async (categoryName, subcategoryName) => {
+  const fetchCategory = async (categoryName) => {
     setLoading(true);
     setError(null);
     try {

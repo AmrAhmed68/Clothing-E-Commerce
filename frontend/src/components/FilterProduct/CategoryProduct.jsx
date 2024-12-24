@@ -4,14 +4,11 @@ import useProduct from '../../hooks/useProduct'
 import { useParams } from 'react-router-dom'
 
 function CategoryProduct() {
-    const {categoryName} = useParams()
-    const {cproduct , fetchCategory} = useProduct()
-    const [loading , setLoading] = useState([])
+    const { categoryName} = useParams()
+    const {cproduct , loading , fetchCategory} = useProduct()
     
     useEffect(() => {
-      setLoading(true)
         fetchCategory(categoryName);
-        setLoading(false)
     }, [categoryName]);
 
     if (loading) {

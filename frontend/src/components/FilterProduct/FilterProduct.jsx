@@ -5,14 +5,11 @@ import { useParams } from 'react-router-dom'
 
 function FilterProduct() {
     const {categoryName, subcategoryName} = useParams()
-    const {product , fetchSubCategory} = useProduct()
-    const [loading , setLoading] = useState([])
+    const {product , loading , fetchSubCategory} = useProduct()
     
 
     useEffect(() => {
-      setLoading(true)
         fetchSubCategory(categoryName, subcategoryName);
-        setLoading(false)
         }, [categoryName, subcategoryName]);
 
         if (loading) {
